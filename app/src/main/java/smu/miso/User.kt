@@ -1,7 +1,5 @@
 package smu.miso
 
-class RoomModel {
+class User {
     private var message: String? = null
-    private var users: String? = null
-
 }

@@ -1,4 +1,4 @@
-package smu.miso
+package smu.miso.model
 
 class UserModel() {
     private var uid: String? = null
