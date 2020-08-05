@@ -19,6 +19,7 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+        supportActionBar?.hide()
 
         val dept_items = resources.getStringArray(R.array.department_spinner_entries)
         val myAdapter =

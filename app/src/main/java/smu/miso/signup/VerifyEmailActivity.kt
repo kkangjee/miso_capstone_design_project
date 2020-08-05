@@ -26,7 +26,7 @@ class VerifyEmailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verify_email)
-
+        supportActionBar?.hide()
         //SignUpEmailActivity 에서 학과 명 받아오기
         val department: String? = intent.getStringExtra("department")
 
@@ -107,7 +107,7 @@ class VerifyEmailActivity : AppCompatActivity() {
                     //이메일 인증 까지 완료 되었으면 DB에 USER 객체 생성(emailVerfied 값을 true 로 DB에 전달)
                     //기본 태그는 학과명으로 태그 설정
                     if (studentID != null) {
-                        userRef.child("users").child(studentID)
+                        userRef.child("users").child(uid)
                             .setValue(UserModel(uid, studentID, true, department, null))
                             .addOnSuccessListener {
                                 Log.d("USER_INSERTED!!", "데이터베이스에 User 객체 생성 완료")

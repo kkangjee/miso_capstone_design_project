@@ -16,7 +16,7 @@ class SignUpEmailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up_email)
-
+        supportActionBar?.hide()
         //SignUpActivity 에서 학교 명 받아오기
         val univName = intent.getStringExtra("univName")
         rcv_univName.text = univName
