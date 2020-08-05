@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "713893298286",
+    "firebase_url": "https://capstonedesignprototype-2196b.firebaseio.com",
+    "project_id": "capstonedesignprototype-2196b",
+    "storage_bucket": "capstonedesignprototype-2196b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713893298286:android:5fd5537768eecc27d2e67f",
+        "android_client_info": {
+          "package_name": "com.moondoni.prototype"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713893298286-qal7jqqmo2sd7c9rf5aslsq1atl93ksv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEDq8NADr7tuc7HcAbSu_E1JievVLRcDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713893298286-qal7jqqmo2sd7c9rf5aslsq1atl93ksv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713893298286:android:3f7c22ec06208cd1d2e67f",
+        "android_client_info": {
+          "package_name": "smu.miso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713893298286-qal7jqqmo2sd7c9rf5aslsq1atl93ksv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEDq8NADr7tuc7HcAbSu_E1JievVLRcDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713893298286-qal7jqqmo2sd7c9rf5aslsq1atl93ksv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
