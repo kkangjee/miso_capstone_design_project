@@ -52,7 +52,7 @@
         android:layout_height="44dp"
         android:layout_marginTop="120dp"
         android:ems="10"
-        android:hint="학교 이메일 입력"
+        android:hint="학번 입력"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintHorizontal_bias="0.492"
@@ -91,11 +91,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="244dp"
         android:layout_marginBottom="16dp"
-        android:text="이메일"
+        android:text="학번"
         android:textColor="#3F51B5"
         app:layout_constraintBottom_toTopOf="@+id/inputEmail"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.819"
+        app:layout_constraintHorizontal_bias="0.235"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
     <EditText

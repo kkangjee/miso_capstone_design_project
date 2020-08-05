@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         //로그인 버튼 눌러 서비스 로그인
         bt_login.setOnClickListener {
             if (inputEmail.text.toString().isEmpty() || inputPassword.text.toString().isEmpty()) {
-                Toast.makeText(this, "email 혹은 password 를 반드시 입력하세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "학번 혹은 비밀번호를 반드시 입력하세요", Toast.LENGTH_SHORT).show()
             } else {
                 auth.signInWithEmailAndPassword(
                     inputEmail.text.toString() + "@sangmyung.kr",
