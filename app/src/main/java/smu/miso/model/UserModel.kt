@@ -1,6 +1,7 @@
 package smu.miso.model
 
 class UserModel() {
+
     private var studentId: Int? = null
     private var uid: String? = null
     private var emailVerified: Boolean = false
@@ -11,7 +12,7 @@ class UserModel() {
     private var roodId: String? = null
 
     //회원가입 시 필요한 정보
-    constructor (uid: String?, studentId: Int?, emailVerified: Boolean, department: String?, tags : ArrayList<String>?) : this()
+    constructor (uid: String, studentId: Int, emailVerified:Boolean, department: String?, tags : ArrayList<String>?) : this()
     {
         this.uid = uid
         this.studentId = studentId
