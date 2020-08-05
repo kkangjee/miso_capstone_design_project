@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_randomchat">
+
+    <fragment
+        android:id="@+id/navigation_randomchat"
+        android:name="smu.miso.ui.randomchat.RandomChatFragment"
+        android:label="@string/title_randomchat"
+        tools:layout="@layout/fragment_randomchat" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_tags"
+            app:destination="@id/navigation_tags" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_tags"
+        android:name="smu.miso.ui.tags.TagsFragment"
+        android:label="@string/title_tags"
+        tools:layout="@layout/fragment_tags" >
+        <action
+            android:id="@+id/action_navigation_tags_to_navigation_home"
+            app:destination="@id/navigation_randomchat" />
+        <action
+            android:id="@+id/action_navigation_tags_to_navigation_tagquestion"
+            app:destination="@id/navigation_tagquestion" />
+    </fragment>
+
+    <fragment
+    android:id="@+id/navigation_tagquestion"
+    android:name="smu.miso.ui.tagquestion.TagQuestionFragment"
+    android:label="@string/title_tagquestion"
+    tools:layout="@layout/fragment_tagquestion" >
+        <action
+            android:id="@+id/action_navigation_tagquestion_to_navigation_tags"
+            app:destination="@id/navigation_tags" />
+        <action
+            android:id="@+id/action_navigation_tagquestion_to_navigation_setting"
+            app:destination="@id/navigation_setting" />
+        <action
+            android:id="@+id/action_navigation_tagquestion_to_navigation_home2"
+            app:destination="@id/navigation_randomchat" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="smu.miso.ui.setting.SettingFragment"
+        android:label="@string/title_setting"
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_navigation_setting_to_navigation_tagquestion"
+            app:destination="@id/navigation_tagquestion" />
+        <action
+            android:id="@+id/action_navigation_setting_to_navigation_home"
+            app:destination="@id/navigation_randomchat" />
+        <action
+            android:id="@+id/action_navigation_setting_to_navigation_tags"
+            app:destination="@id/navigation_tags" />
+    </fragment>
+</navigation>
