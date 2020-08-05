@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Sangmyung University Department Entry Set-->
+    <string-array name="department_spinner_entries">
+        <!--인문사회과학대학-->
+        <item>역사콘텐츠전공</item>
+        <item>지적재산권전공</item>
+        <item>문헌정보학전공</item>
+        <item>공간환경학부</item>
+        <item>공공인재학부</item>
+        <item>가족복지학과</item>
+        <item>국가안보학과</item>
+        <!--사범대학-->
+        <item>국어교육과</item>
+        <item>영어교육과</item>
+        <item>교육학과</item>
+        <item>수학교육과</item>
+        <!--경영경제대학-->
+        <item>경제금융학부</item>
+        <item>경영학부</item>
+        <item>글로벌경영학과</item>
+        <item>융합경영학과</item>
+        <!--융합공과대학-->
+        <item>게임전공</item>
+        <item>애니메이션전공</item>
+        <item>컴퓨터과학전공</item>
+        <item>한일문화콘텐츠전공</item>
+        <item>휴먼지능정보공학전공</item>
+        <item>전기공학전공</item>
+        <item>융합전자공학전공</item>
+        <item>생명공학전공</item>
+        <item>화학에너지공학전공</item>
+        <item>화공신소재전공</item>
+        <!--문화예술대학-->
+        <item>식품영양학전공</item>
+        <item>의류학전공</item>
+        <item>스포츠건강관리전공</item>
+        <item>무용예술전공</item>
+        <item>조형예술전공</item>
+        <item>생활예술전공</item>
+        <item>음악학부</item>
+    </string-array>
+</resources>
