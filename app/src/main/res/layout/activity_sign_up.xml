@@ -96,12 +96,15 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_end="60dp" />
 
-    <Button
+    <TextView
         android:id="@+id/bt_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
-        android:text="제출하기"
+        android:text="다음 단계로 이동"
+        android:textColor="#3F51B5"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintHorizontal_bias="0.834"
         app:layout_constraintStart_toStartOf="@+id/guideline4"

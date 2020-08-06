@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_verify_email.*
-import smu.miso.HomeActivity
+import smu.miso.signup.verifiedEmail
 import smu.miso.MainActivity
 import smu.miso.R
 import smu.miso.model.UserModel
@@ -27,11 +27,12 @@ class VerifyEmailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verify_email)
         supportActionBar?.hide()
+
         //SignUpEmailActivity 에서 학과 명 받아오기
         val department: String? = intent.getStringExtra("department")
 
         val uid: String = user?.uid.toString()
-        val email: String? = user?.email
+        //val email: String? = user?.email
 
         var studentID = intent.getStringExtra("studentID")
         if (!studentID.isNullOrEmpty()) {
@@ -126,15 +127,5 @@ class VerifyEmailActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    //boolean type으로 이메일 인증 성공여부 판별
-    private fun verifiedEmail(): Boolean {
-        user?.let {
-            // Check if user's email is verified'
-            //Boolean Type
-            user.isEmailVerified
-        }
-        return user!!.isEmailVerified
     }
 }
