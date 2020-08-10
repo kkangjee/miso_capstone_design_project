@@ -46,19 +46,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_end="60dp" />
 
-    <EditText
-        android:id="@+id/inputEmail"
-        android:layout_width="240dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="120dp"
-        android:ems="10"
-        android:hint="학번 입력"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
     <Button
         android:id="@+id/bt_login"
         android:layout_width="100dp"
@@ -88,28 +75,26 @@
         android:id="@+id/textEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="244dp"
-        android:layout_marginBottom="16dp"
         android:text="학번"
         android:textColor="#3F51B5"
-        app:layout_constraintBottom_toTopOf="@+id/inputEmail"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.235"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/inputPassword"
         android:layout_width="240dp"
         android:layout_height="44dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:ems="10"
         android:hint="비밀번호 입력"
         android:inputType="textPassword"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/inputStudentID" />
 
     <TextView
         android:id="@+id/bt_gotoSignUp"
@@ -122,5 +107,18 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
+
+    <EditText
+        android:id="@+id/inputStudentID"
+        android:layout_width="240dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="학번 입력"
+        android:inputType="number"
+        android:maxLength="9"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/textEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package smu.miso
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
 //MainActivity는 bottomnavigationview를 연결하기 위한 엑티비티입니다.
+    var mBackWait: Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -26,5 +28,20 @@ class HomeActivity : AppCompatActivity() {
                 R.id.navigation_randomchat, R.id.navigation_tags, R.id.navigation_tagquestion, R.id.navigation_setting))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    //뒤로가기 버튼 2번 터치 시 액티비티 종료
+    override fun onBackPressed() {
+        // 뒤로가기 버튼 클릭
+        if (System.currentTimeMillis() - mBackWait >= 2000) {
+            mBackWait = System.currentTimeMillis()
+            Toast.makeText(
+                this@HomeActivity,
+                "뒤로가기 버튼을 한번 더 누르면 종료됩니다.",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            finish()
+        }
     }
 }

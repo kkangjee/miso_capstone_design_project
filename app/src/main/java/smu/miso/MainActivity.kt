@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import smu.miso.signup.SignUpActivity
 import smu.miso.signup.VerifyEmailActivity
+import smu.miso.signup.verifiedEmail
 
 class MainActivity : AppCompatActivity() {
     var mBackWait: Long = 0
@@ -23,6 +24,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
+
+        //자동 로그인 기능.
+        //Firebase 에 User 정보가 이미 존재 하면 바로 HomeActivity 로 이동
         if (user != null) {
             when (verifiedEmail()) {
                 true -> {
@@ -47,18 +51,18 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        //회원가입 정보가 없을 때 텍스트 눌러 회원가입 액티비티로 이동
+        //회원가입 정보가 없을 때 회원가입 액티비티로 이동
         bt_gotoSignUp.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
         //로그인 버튼 눌러 서비스 로그인
         bt_login.setOnClickListener {
-            if (inputEmail.text.toString().isEmpty() || inputPassword.text.toString().isEmpty()) {
+            if (inputStudentID.text.toString().isEmpty() || inputPassword.text.toString().isEmpty()) {
                 Toast.makeText(this, "학번 혹은 비밀번호를 반드시 입력하세요", Toast.LENGTH_SHORT).show()
             } else {
                 auth.signInWithEmailAndPassword(
-                    inputEmail.text.toString() + "@sangmyung.kr",
+                    inputStudentID.text.toString() + "@sangmyung.kr",
                     inputPassword.text.toString()
                 )
                     .addOnCompleteListener(this) { task ->
@@ -84,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //뒤로가기 버튼 2번 터치 시 액티비티 종료
+    //뒤로가기 버튼 2번 터치 시 액티비티 종료 함수
     override fun onBackPressed() {
         // 뒤로가기 버튼 클릭
         if (System.currentTimeMillis() - mBackWait >= 2000) {
@@ -97,15 +101,5 @@ class MainActivity : AppCompatActivity() {
         } else {
             finish()
         }
-    }
-
-
-    private fun verifiedEmail(): Boolean {
-        user?.let {
-            // Check if user's email is verified'
-            //Boolean Type
-            user.isEmailVerified
-        }
-        return user!!.isEmailVerified
     }
 }

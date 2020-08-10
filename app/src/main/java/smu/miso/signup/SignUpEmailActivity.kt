@@ -43,7 +43,7 @@ class SignUpEmailActivity : AppCompatActivity() {
         }
     }
 
-    fun createEmailID(email: String, password: String) {
+    private fun createEmailID(email: String, password: String) {
         FirebaseAuth.getInstance()
             .createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
@@ -61,7 +61,7 @@ class SignUpEmailActivity : AppCompatActivity() {
     }
 
     //로그인 세션 관리, SignUp이 정상적으로 완료되면,
-    fun moveNextPage() {
+    private fun moveNextPage() {
         //파이어베이스 인증 인스턴스 초기화 후 현재 파이어베이스에 등록되어 있고, 로그인된 사용자라면 이메일 인증 액티비티로 전환
         val currentUser = auth.currentUser
         if (currentUser != null) {

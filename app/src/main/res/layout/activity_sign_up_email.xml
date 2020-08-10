@@ -128,13 +128,16 @@
         app:layout_constraintStart_toStartOf="@+id/guideline10"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-    <Button
+    <TextView
         android:id="@+id/Submit2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="36dp"
-        android:text="제출하기"
+        android:text="다음 단계로 이동"
+        android:textColor="#3F51B5"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintTop_toBottomOf="@+id/re_inputPwd" />
 
