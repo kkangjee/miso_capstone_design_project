@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_randomchat.*
+import smu.miso.Chat.ChatActivity
 import smu.miso.Chat.ChatFragment
 import smu.miso.R
 class RandomChatFragment : Fragment() {
@@ -55,16 +56,19 @@ class RandomChatFragment : Fragment() {
         button2.setOnClickListener {
             setAllDepartmentUsers()
         }
+
+
     }
     //이하 메소드 부분
     //프래그먼트 설정
     fun setFragmentSetting() {
-        fragmentManager?.beginTransaction()?.apply {
-            replace(R.id.nav_host_fragment, ChatFragment())
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            commit()
+        requireActivity().run {
+            startActivity(Intent(this, ChatActivity::class.java))
+            finish() // If activity no more needed in back stack
         }
     }
+
+
     //학과별 설정
     private fun setDepartmentUsers() {
         var department: String = ""
@@ -108,13 +112,9 @@ class RandomChatFragment : Fragment() {
                     roomID = FirebaseDatabase.getInstance().reference.child("rooms").push().key
                     FirebaseDatabase.getInstance().reference.child("rooms/$roomID").child("users")
                             .setValue(selectedUsers).addOnSuccessListener {
-                                //val intent = Intent(context, ChatFragment::class.java)
-                                //intent.putExtra("roomID", roomID)
-                                //startActivity(intent)
+
                                 setFragmentSetting()
-//                            userRef.child("deptMap").child(department)
-//                                .setValue("")
-                                //activity?.finish()
+
                             }
                     userRef.child("deptMap").child(department)
                             .setValue("")

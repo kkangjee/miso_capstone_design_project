@@ -13,9 +13,9 @@ class HomeActivity : AppCompatActivity() {
 //MainActivity는 bottomnavigationview를 연결하기 위한 엑티비티입니다.
     var mBackWait: Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
-        supportActionBar?.hide()
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_home)
+            supportActionBar?.hide()
 
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
@@ -28,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.navigation_randomchat, R.id.navigation_tags, R.id.navigation_tagquestion, R.id.navigation_setting))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 
     //뒤로가기 버튼 2번 터치 시 액티비티 종료

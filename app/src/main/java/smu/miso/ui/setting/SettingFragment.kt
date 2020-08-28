@@ -31,7 +31,7 @@ class SettingFragment : Fragment() {
     }
     //버튼 등의 리스너를 달 때에는 onViewCreated안에 작성
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        super.onViewCreated(view, savedInstanceState)
     }
     //사용자 설정 함수나 override함수들(onBackPressed같은거)은 여기에 작성
 }
