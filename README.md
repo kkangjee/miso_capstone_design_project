@@ -1,4 +1,4 @@
-## Miso Sangmyung University Official App
+## Miso Sangmyung Chat App
 ### 상명대학교 컴퓨터과학과 Capstone Design 프로젝트입니다.
 - **2020/04/18** </br>
 firebase 플랫폼의 real-time database 종속항목을 추가해놓은 상태입니다.
