@@ -44,76 +44,123 @@ class RandomChatFragment : Fragment() {
         return root
     }
 
-    //버튼 등의 리스너를 달 때에는 onViewCreated안에 작성
+    //무작위 사용자 설정
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var department: String = ""
-        var deptKey: String = ""
+
         //과끼리 랜덤채팅
         button.setOnClickListener {
-            userRef.child("users").child(uid).addListenerForSingleValueEvent(object :
-                ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    department = snapshot.child("department").value.toString()
-                    Log.d("과 끼리 학과 가져오기", department)
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Log.e("학과 가져오기 실패", "두둥탁")
-                }
-            })
-
-
-            userRef.child("deptMap").child(department).addListenerForSingleValueEvent(object :
-                ValueEventListener {
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    //Log.d("학과 가져오기", department)
-
-                    for (singleSnapshot in snapshot.children) {
-                        //Log.d("스냅샷",singleSnapshot.key.toString())
-
-                        //내 학과와 같은 상황일 때 반복문 종료
-                        if (singleSnapshot.key.toString() == department) {
-                            Log.d("기존 uid 가져오기", deptKey)
-                            deptKey = snapshot.child(department).value.toString()
-                            break
-                        }
-
-                    }
-
-
-                    if (deptKey == "") {
-                        //TODO: 아무도 대기 상태가 아닐 경우 대기상태로 변경하고 value값을 넣어준다.
-                        userRef.child("deptMap").child(department)
-                            .setValue(uid)
-                    } else {
-                        //TODO: 이미 uid 값이 있는 것을 확인하여 손 잡고 채팅방을 나간다. 그리고 value값을 비운다.
-                        Log.d("deptKey이미 존재", "확인")
-                        userRef.child("deptMap").child(department)
-                            .setValue("")
-                    }
-
-                    fragmentManager?.beginTransaction()?.apply {
-                        replace(R.id.nav_host_fragment, ChatFragment())
-                        setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                        commit()
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                }
-            })
+            setDepartmentUsers()
         }
         //전체과 랜덤채팅
         button2.setOnClickListener {
-            fragmentManager?.beginTransaction()?.apply {
-                replace(R.id.nav_host_fragment, ChatFragment())
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                commit()
-            }
+            setAllDepartmentUsers()
         }
     }
+
+
+
+    //이하 메소드 부분
+
+    //프래그먼트 설정
+    fun setFragmentSetting() {
+        fragmentManager?.beginTransaction()?.apply {
+            replace(R.id.nav_host_fragment, ChatFragment())
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            commit()
+        }
+    }
+
+    //학과별 설정
+    private fun setDepartmentUsers() {
+        var department: String = ""
+        var deptKey: String = ""
+
+        userRef.child("users").child(uid).addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                department = snapshot.child("department").value.toString()
+                Log.d("과 끼리 학과 가져오기", department)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("학과 가져오기 실패", "두둥탁")
+            }
+        })
+
+        userRef.child("deptMap").child(department).addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                //Log.d("학과 가져오기", department)
+
+                for (singleSnapshot in snapshot.children) {
+                    Log.d("스냅샷", singleSnapshot.key.toString())
+
+                    //내 학과와 같은 상황일 때 반복문 종료
+                    if (singleSnapshot.key.toString() == department) {
+                        Log.d("기존 uid 가져오기", deptKey)
+                        deptKey = snapshot.child(department).value.toString()
+                        break
+                    }
+                }
+                if (deptKey == "") {
+                    //TODO: 아무도 대기 상태가 아닐 경우 대기상태로 변경하고 value값을 넣어준다.
+                    userRef.child("deptMap").child(department)
+                        .setValue(uid)
+                } else {
+                    //TODO: 이미 uid 값이 있는 것을 확인하여 손 잡고 채팅방을 나간다. 그리고 value값을 비운다.
+                    Log.d("deptKey이미 존재", "확인")
+                    userRef.child("deptMap").child(department)
+                        .setValue("")
+                }
+                setFragmentSetting()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+    //전체과 설정
+    private fun setAllDepartmentUsers() {
+        var deptKey = ""
+        val allDept = "AllDept"
+
+        userRef.child("deptMap").addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                Log.d("학과 가져오기", allDept)
+
+                for (singleSnapshot in snapshot.children) {
+                    Log.d("스냅샷", singleSnapshot.key.toString())
+
+                    //전체과를 찾은 상황일 때 반복문 종료
+                    if (singleSnapshot.key.toString() == allDept) {
+                        Log.d("기존 uid 가져오기", deptKey)
+                        deptKey = snapshot.child(allDept).value.toString()
+                        break
+                    }
+                }
+
+                if (deptKey == "") {
+                    //TODO: 아무도 대기 상태가 아닐 경우 대기상태로 변경하고 value값을 넣어준다.
+                    userRef.child("deptMap").child(allDept)
+                        .setValue(uid)
+                } else {
+                    //TODO: 이미 uid 값이 있는 것을 확인하여 손 잡고 채팅방을 나간다. 그리고 value값을 비운다.
+                    Log.d("deptKey이미 존재", "확인")
+                    userRef.child("deptMap").child(allDept)
+                        .setValue("")
+                }
+
+                setFragmentSetting()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
     //사용자 설정 함수나 override함수들(onBackPressed같은거)은 여기에 작성
 }
