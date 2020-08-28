@@ -27,6 +27,24 @@ Notification 기능 구현
 - 그 외 전공일 시 기본 프로필 사진 적용 (2020.07.26) 
   + ChatActivity의 messengerImageView(채팅 프로필사진)도 동일한 기능으로 구현 예정
 
-- **2020/08/28** </br>
+- **2020/08/26 ~ 08/28** </br>
 1. 학과 별 매칭 Database 구조화 (1:1 채팅방 만들기)
+ - '과'끼리 버튼을 눌렀을 때
+  - 처음 대기하는 사람이라면 deptMap-학과명-uid로 우선 저장
+  - 만약 누가 대기하고 있다면 자신의 uid와 대기하는 사람의 uid를 Map에 담아 room 생성 후 채팅
+  - 학과명 내의 uid값은 null값으로 초기화하여 비운다.
 2. 전체 학과 별 매칭 Database 구조화 (1:1 채팅방 만들기)
+  - 처음 대기하는 사람이라면 deptMap-전체학과-uid로 우선 저장
+  - 만약 누가 대기하고 있다면 자신의 uid와 대기하는 사람의 uid를 Map에 담아 room 생성 후 채팅
+  - 전체 학과 내의 uid값도 null값으로 초기화
+3. ChatActivity 내에 ChatFragment 적용
+
+- **2020/08/29** </br>
+1. RandomChatFragment
+    - 아무도 없이 먼저 매칭을 눌렀을 때 채팅 방으로 안들어가지는 버그 수정
+2. SettingFragment
+    - 사용자 정보 및 설정 페이지 구현 (기존 UI 변경, 대표색 배경)
+    - 사용자 로그아웃 기능 구현
+    - 사용자 삭제 기능 구현 
+        - 학번, 비밀번호 입력하는 재인증 과정 후 계정 삭제
+        - Firebase, Authentication, Databse 전부 데이터 삭제 확인 완료
