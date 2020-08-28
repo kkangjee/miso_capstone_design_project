@@ -29,4 +29,12 @@ Notification 기능 구현
 
 - **2020/08/28** </br>
 1. 학과 별 매칭 Database 구조화 (1:1 채팅방 만들기)
+ - '과'끼리 버튼을 눌렀을 때
+  - 처음 대기하는 사람이라면 deptMap-학과명-uid로 우선 저장
+  - 만약 누가 대기하고 있다면 자신의 uid와 대기하는 사람의 uid를 Map에 담아 room 생성 후 채팅
+  - 학과명 내의 uid값은 null값으로 초기화하여 비운다.
 2. 전체 학과 별 매칭 Database 구조화 (1:1 채팅방 만들기)
+  - 처음 대기하는 사람이라면 deptMap-전체학과-uid로 우선 저장
+  - 만약 누가 대기하고 있다면 자신의 uid와 대기하는 사람의 uid를 Map에 담아 room 생성 후 채팅
+  - 전체 학과 내의 uid값도 null값으로 초기화
+3. ChatActivity 내에 ChatFragment 적용
