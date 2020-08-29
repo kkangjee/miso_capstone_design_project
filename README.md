@@ -38,3 +38,13 @@ Notification 기능 구현
   - 만약 누가 대기하고 있다면 자신의 uid와 대기하는 사람의 uid를 Map에 담아 room 생성 후 채팅
   - 전체 학과 내의 uid값도 null값으로 초기화
 3. ChatActivity 내에 ChatFragment 적용
+
+- **2020/08/29** </br>
+1. RandomChatFragment
+    - 아무도 없이 먼저 매칭을 눌렀을 때 채팅 방으로 안들어가지는 버그 수정
+2. SettingFragment
+    - 사용자 정보 및 설정 페이지 구현 (기존 UI 변경, 대표색 배경)
+    - 사용자 로그아웃 기능 구현
+    - 사용자 삭제 기능 구현 
+        - 학번, 비밀번호 입력하는 재인증 과정 후 계정 삭제
+        - Firebase, Authentication, Databse 전부 데이터 삭제 확인 완료

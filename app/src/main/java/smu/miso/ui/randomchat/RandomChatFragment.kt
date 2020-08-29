@@ -61,6 +61,8 @@ class RandomChatFragment : Fragment() {
     }
     //이하 메소드 부분
     //프래그먼트 설정
+    //매칭 버튼을 눌렀을 때 채팅방 입장 (대기 중인 사용자도 채팅방 입장)
+    //TODO : 채팅방 입장 전에 Splash(대기화면) 출력 후 채팅 방 입장 되어야 함 (update 200829)
     fun setFragmentSetting() {
         requireActivity().run {
             startActivity(Intent(this, ChatActivity::class.java))
@@ -80,7 +82,7 @@ class RandomChatFragment : Fragment() {
                 Log.d("과 끼리 학과 가져오기", department)
             }
             override fun onCancelled(error: DatabaseError) {
-                Log.e("학과 가져오기 실패", "두둥탁")
+                Log.e("학과 가져오기", "실패")
             }
         })
         userRef.child("deptMap").child(department).addListenerForSingleValueEvent(object :
@@ -88,10 +90,10 @@ class RandomChatFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 //Log.d("학과 가져오기", department)
                 for (singleSnapshot in snapshot.children) {
-                    Log.d("스냅샷", singleSnapshot.key.toString())
+                    Log.d("학과 스냅샷", singleSnapshot.key.toString())
                     //내 학과와 같은 상황일 때 반복문 종료
                     if (singleSnapshot.key.toString() == department) {
-                        Log.d("기존 uid 가져오기", deptKey)
+                        Log.d("대기 중인 사용자", deptKey)
                         deptKey = snapshot.child(department).value.toString()
                         break
                     }
@@ -100,9 +102,10 @@ class RandomChatFragment : Fragment() {
                     //TODO: 아무도 대기 상태가 아닐 경우 대기상태로 변경하고 value값을 넣어준다.
                     userRef.child("deptMap").child(department)
                             .setValue(uid)
+                    setFragmentSetting()
                 } else {
                     //TODO: 이미 uid 값이 있는 것을 확인하여 손 잡고 채팅방을 나간다. 그리고 value값을 비운다.
-                    Log.d("deptKey이미 존재", "확인")
+                    Log.d("매칭 대기 중인 사용자 여부", "확인")
                     var uid1 = deptKey
                     var uid2 = uid
                     selectedUsers.put(uid1, department)
@@ -112,14 +115,12 @@ class RandomChatFragment : Fragment() {
                     roomID = FirebaseDatabase.getInstance().reference.child("rooms").push().key
                     FirebaseDatabase.getInstance().reference.child("rooms/$roomID").child("users")
                             .setValue(selectedUsers).addOnSuccessListener {
-
-                                setFragmentSetting()
+                            setFragmentSetting()
 
                             }
                     userRef.child("deptMap").child(department)
                             .setValue("")
                 }
-                //setFragmentSetting()
             }
             override fun onCancelled(error: DatabaseError) {
             }
@@ -128,16 +129,16 @@ class RandomChatFragment : Fragment() {
     //전체과 설정
     private fun setAllDepartmentUsers() {
         var deptKey = ""
-        val allDept = "AllDept"
+        val allDept = "전체학과"
         userRef.child("deptMap").addListenerForSingleValueEvent(object :
                 ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 Log.d("학과 가져오기", allDept)
                 for (singleSnapshot in snapshot.children) {
-                    Log.d("스냅샷", singleSnapshot.key.toString())
+                    Log.d("학과 스냅샷", singleSnapshot.key.toString())
                     //전체과를 찾은 상황일 때 반복문 종료
                     if (singleSnapshot.key.toString() == allDept) {
-                        Log.d("기존 uid 가져오기", deptKey)
+                        Log.d("대기 중인 사용자", deptKey)
                         deptKey = snapshot.child(allDept).value.toString()
                         break
                     }
@@ -146,9 +147,10 @@ class RandomChatFragment : Fragment() {
                     //TODO: 아무도 대기 상태가 아닐 경우 대기상태로 변경하고 value값을 넣어준다.
                     userRef.child("deptMap").child(allDept)
                             .setValue(uid)
+                    setFragmentSetting()
                 } else {
                     //TODO: 이미 uid 값이 있는 것을 확인하여 손 잡고 채팅방을 나간다. 그리고 value값을 비운다.
-                    Log.d("deptKey이미 존재", "확인")
+                    Log.d("매칭 대기 중인 사용자 여부", "확인")
                     var uid1 = deptKey
                     var uid2 = uid
                     selectedUsers.put(uid1, allDept)
