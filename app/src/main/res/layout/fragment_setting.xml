@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#3F51B5"
     android:orientation="vertical"
+    android:id = "@+id/setting"
     tools:context=".ui.setting.SettingFragment">
 
     <LinearLayout

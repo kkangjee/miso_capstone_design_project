@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_verify_email.*
+import smu.miso.CloudFunctions
 import smu.miso.signup.verifiedEmail
 import smu.miso.MainActivity
 import smu.miso.R
@@ -126,6 +127,9 @@ class VerifyEmailActivity : AppCompatActivity() {
                     Confirm.text = "재 확인"
                 }
             }
+        }
+        verify_email.setOnClickListener{
+            CloudFunctions.hideKeyboard(this)
         }
     }
 }
