@@ -49,6 +49,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -96,6 +97,7 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/userInfoValue"
                 android:layout_width="wrap_content"
@@ -146,6 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20sp"
                 android:layout_marginTop="10sp"
+                android:layout_marginBottom="5sp"
                 android:background="#303F9F"
                 android:text="로그아웃 하기"
                 android:textColor="#FFFFFF" />
@@ -168,12 +171,20 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:text="학번, 비밀번호 입력 후 탈퇴하기 버튼 터치"
+                android:textColor="#FFFFFF" />
+
             <EditText
                 android:id="@+id/reAuthStudentId"
                 android:layout_width="210dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20sp"
-                android:layout_marginTop="10sp"
+                android:layout_marginTop="15sp"
                 android:ems="10"
                 android:hint="학번 입력"
                 android:inputType="number"

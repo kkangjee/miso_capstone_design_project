@@ -139,9 +139,4 @@ class VerifyEmailActivity : AppCompatActivity() {
         val intent = Intent(this, SignUpEmailActivity::class.java)
         startActivity(intent)
     }
-
-    override fun onStop() {
-        user?.delete()
-        super.onStop()
-    }
 }
