@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_up_email.*
+import smu.miso.CloudFunctions
 import smu.miso.R
 
 
@@ -41,11 +42,14 @@ class SignUpEmailActivity : AppCompatActivity() {
                 createEmailID(email, password)
             }
         }
+        sign_up_email.setOnClickListener{
+            CloudFunctions.hideKeyboard(this)
+        }
     }
 
     private fun createEmailID(email: String, password: String) {
         FirebaseAuth.getInstance()
-            .createUserWithEmailAndPassword(email, password)
+            .createUserWithEmailAndPassword(email, password) //이게 Auth에 지정해주는 곳
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     moveNextPage()

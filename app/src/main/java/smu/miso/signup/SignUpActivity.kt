@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import smu.miso.CloudFunctions
+import smu.miso.MainActivity
 import smu.miso.R
 
 
@@ -55,5 +57,9 @@ class SignUpActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        sign_up.setOnClickListener{
+            CloudFunctions.hideKeyboard(this)
+        }
     }
+  
 }

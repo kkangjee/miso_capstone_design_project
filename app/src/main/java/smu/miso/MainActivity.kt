@@ -1,8 +1,13 @@
 package smu.miso
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -22,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
 
@@ -49,7 +55,10 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-
+        //배경을 누르면 키보드가 내려가게끔
+        mainview.setOnClickListener{
+            CloudFunctions.hideKeyboard(this)
+        }
 
         //회원가입 정보가 없을 때 회원가입 액티비티로 이동
         bt_gotoSignUp.setOnClickListener {
@@ -58,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
         //로그인 버튼 눌러 서비스 로그인
         bt_login.setOnClickListener {
+
             if (inputStudentID.text.toString().isEmpty() || inputPassword.text.toString().isEmpty()) {
                 Toast.makeText(this, "학번 혹은 비밀번호를 반드시 입력하세요", Toast.LENGTH_SHORT).show()
             } else {
@@ -91,6 +101,7 @@ class MainActivity : AppCompatActivity() {
     //뒤로가기 버튼 2번 터치 시 액티비티 종료 함수
     override fun onBackPressed() {
         // 뒤로가기 버튼 클릭
+        CloudFunctions.hideKeyboard(this)
         if (System.currentTimeMillis() - mBackWait >= 2000) {
             mBackWait = System.currentTimeMillis()
             Toast.makeText(
