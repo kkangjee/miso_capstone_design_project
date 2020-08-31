@@ -1,11 +1,13 @@
 package smu.miso.Chat
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import smu.miso.R
+import smu.miso.SplashActivity
 
 
 class ChatActivity : AppCompatActivity() {
@@ -14,6 +16,9 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         //supportActionBar?.hide()
+
+        val splashIntent = Intent(this, SplashActivity::class.java)
+        startActivity(splashIntent)
 
         supportActionBar!!.setDisplayShowTitleEnabled(false) // 타이틀 안보이게 하기
 
