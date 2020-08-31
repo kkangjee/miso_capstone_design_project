@@ -135,17 +135,13 @@ class VerifyEmailActivity : AppCompatActivity() {
     }
     override fun onBackPressed() {
         // 뒤로가기 버튼 클릭
-        if (user != null) {
-            user.delete()
-        }
+        user?.delete()
         val intent = Intent(this, SignUpEmailActivity::class.java)
         startActivity(intent)
     }
 
     override fun onStop() {
-        if (user != null) {
-            user.delete()
-        }
+        user?.delete()
         super.onStop()
     }
 }
