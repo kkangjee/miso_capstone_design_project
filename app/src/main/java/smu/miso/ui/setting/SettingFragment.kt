@@ -101,9 +101,11 @@ class SettingFragment : Fragment() {
             reAuthenticate()
             userRef.child("users").child(deleteUid.toString()).setValue(null)
         }
+
         setting.setOnClickListener{
             CloudFunctions.hideKeyboard(context, this.view)
         }
+
     }
 
 

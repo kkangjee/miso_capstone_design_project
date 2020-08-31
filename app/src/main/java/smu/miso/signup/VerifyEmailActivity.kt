@@ -128,8 +128,24 @@ class VerifyEmailActivity : AppCompatActivity() {
                 }
             }
         }
+
         verify_email.setOnClickListener{
             CloudFunctions.hideKeyboard(this)
         }
+    }
+    override fun onBackPressed() {
+        // 뒤로가기 버튼 클릭
+        if (user != null) {
+            user.delete()
+        }
+        val intent = Intent(this, SignUpEmailActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun onStop() {
+        if (user != null) {
+            user.delete()
+        }
+        super.onStop()
     }
 }
