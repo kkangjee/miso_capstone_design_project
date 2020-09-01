@@ -60,7 +60,7 @@ class SettingFragment : Fragment() {
                         emailVerified = datasnapshot.child("emailVerified").value.toString()
                         department = datasnapshot.child("department").value.toString()
 
-                        emailValue.text = "$studentId@sangmyung.kr"
+                        emailValue?.text = "$studentId@sangmyung.kr"
                         if (emailVerified.toBoolean()) {
                             emailVerifiedValue.text = "인증 완료"
                         } else {
@@ -94,21 +94,26 @@ class SettingFragment : Fragment() {
 
         //사용자 삭제 함수
         signoutBtn.setOnClickListener {
-            //TODO: 1. 사용자 인증 후 Authentication에서 삭제, 2. 데이터베이스에서 사용자 정보 삭제
-            //uid를 auth.currentUser 에서 받아오기 때문에 reAuthenticate() 함수 호출 시 uid가 소멸됨. deleteUid에 소멸 전에 받아둠.
-            //Authentication, Database에서 정보 삭제 확인
-            val deleteUid = uid
-            reAuthenticate()
-            userRef.child("users").child(deleteUid.toString()).setValue(null)
+            if (reAuthStudentId.text.toString() == "" && reAuthPassword.text.toString() == "") {
+                Toast.makeText(
+                    activity, "학번과 비밀번호를 입력 후 탈퇴버튼을 터치",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                //TODO: 1. 사용자 인증 후 Authentication에서 삭제, 2. 데이터베이스에서 사용자 정보 삭제
+                //uid를 auth.currentUser 에서 받아오기 때문에 reAuthenticate() 함수 호출 시 uid가 소멸됨. deleteUid에 소멸 전에 받아둠.
+                //Authentication, Database에서 정보 삭제 확인
+                val deleteUid = uid
+                reAuthenticate()
+                userRef.child("users").child(deleteUid.toString()).setValue(null)
+            }
         }
 
-        setting.setOnClickListener{
+        setting.setOnClickListener {
             CloudFunctions.hideKeyboard(context, this.view)
         }
 
     }
-
-
 
     private fun deleteUser() {
         user?.delete()?.addOnCompleteListener { task ->
@@ -133,8 +138,10 @@ class SettingFragment : Fragment() {
     //사용자 재인증 과정
     private fun reAuthenticate() {
         Log.e("repassword", user?.email.toString() + " : " + reAuthPassword.text.toString())
-        val credential = EmailAuthProvider
-            .getCredential(reAuthStudentId.text.toString()+"@sangmyung.kr", reAuthPassword.text.toString())
+        val credential = EmailAuthProvider.getCredential(
+            reAuthStudentId.text.toString() + "@sangmyung.kr",
+            reAuthPassword.text.toString()
+        )
         user?.reauthenticate(credential)
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {

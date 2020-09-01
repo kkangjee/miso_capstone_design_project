@@ -18,12 +18,13 @@ class SplashActivity : AppCompatActivity() {
     private val database = FirebaseDatabase.getInstance()
     private val userRef = database.reference
     private val uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
-    private var getRoomId : String? = ""
+    private var getRoomId: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        supportActionBar!!.setDisplayShowTitleEnabled(false) // 타이틀 안보이게 하기
 
         end_button.setOnClickListener {
             finish()
@@ -46,19 +47,16 @@ class SplashActivity : AppCompatActivity() {
                         }
                     }
                 }
+
                 override fun onCancelled(error: DatabaseError) {
 
                 }
             })
 
         } else {//user2
-            Toast.makeText(this, "사용자 2 입니다. 채팅을 엽니다.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "사용자가 입장했습니다. 채팅을 엽니다.", Toast.LENGTH_LONG).show()
             finish()
         }
-
-
-
-
 
 
     }
