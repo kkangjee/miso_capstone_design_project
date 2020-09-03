@@ -133,10 +133,11 @@ class VerifyEmailActivity : AppCompatActivity() {
             CloudFunctions.hideKeyboard(this)
         }
     }
-    override fun onBackPressed() {
-        // 뒤로가기 버튼 클릭
-        user?.delete()
-        val intent = Intent(this, SignUpEmailActivity::class.java)
-        startActivity(intent)
-    }
+//    //이론상 이게 없어도 될 거 같음
+//    override fun onBackPressed() {
+//        // 뒤로가기 버튼 클릭
+//        user?.delete()
+//        val intent = Intent(this, SignUpEmailActivity::class.java)
+//        startActivity(intent)
+//    }
 }
