@@ -2,23 +2,32 @@ package smu.miso.Chat
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import smu.miso.R
 import smu.miso.SplashActivity
 
 
 class ChatActivity : AppCompatActivity() {
 
+    private val database = FirebaseDatabase.getInstance()
+    private val userRef = database.reference
+    private val uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
+
+    private var randomRoomId :String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         //supportActionBar?.hide()
 
-        val splashIntent = Intent(this, SplashActivity::class.java)
-        startActivity(splashIntent)
 
         supportActionBar!!.setDisplayShowTitleEnabled(false) // 타이틀 안보이게 하기
 

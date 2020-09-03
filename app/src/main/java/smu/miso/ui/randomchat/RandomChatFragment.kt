@@ -69,16 +69,15 @@ class RandomChatFragment : Fragment() {
     //TODO : 채팅방 입장 전에 Splash(대기화면) 출력 후 채팅 방 입장 되어야 함 (update 200829)
     fun goChattingActivity() {
         requireActivity().run {
-            startActivity(Intent(this, ChatActivity::class.java))
+            val nextIntent = Intent(this, ChatActivity::class.java)
+            startActivity(nextIntent)
             //finish() // If activity no more needed in back stack
         }
     }
 
     fun goSplashActivity() {
         requireActivity().run {
-            goChattingActivity()
             val nextIntent = Intent(this, SplashActivity::class.java)
-            //Log.e("roodId",roomID.toString())
             nextIntent.putExtra("splash_room_id", roomID)
             startActivity(nextIntent)
             //finish() // If activity no more needed in back stack

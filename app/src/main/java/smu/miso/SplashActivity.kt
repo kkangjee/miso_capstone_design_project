@@ -26,7 +26,10 @@ class SplashActivity : AppCompatActivity() {
 
         supportActionBar!!.setDisplayShowTitleEnabled(false) // 타이틀 안보이게 하기
 
+
+
         end_button.setOnClickListener {
+            Toast.makeText(this, "대기상태 종료", Toast.LENGTH_LONG).show()
             finish()
         }
 
@@ -42,14 +45,12 @@ class SplashActivity : AppCompatActivity() {
                         cnt++
                         if (cnt == 2) {
                             finish()
-
-
+                            val nextIntent = Intent(this@SplashActivity, ChatActivity::class.java)
+                            startActivity(nextIntent)
                         }
                     }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
-
                 }
             })
 
