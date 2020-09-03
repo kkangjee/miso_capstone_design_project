@@ -53,3 +53,21 @@ Notification 기능 구현
     - 사용자 삭제 기능 구현 
         - 학번, 비밀번호 입력하는 재인증 과정 후 계정 삭제
         - Firebase, Authentication, Databse 전부 데이터 삭제 확인 완료
+        
+- **2020/08/31** </br>
+1. 과끼리 채팅 테스트
+  - A user가 채팅방에 최초 진입 -> DB deptMap에 (학과 : A uid) 형태로 push, SplashActivity가 해당 roomid와 함께 출력 (Toast : roomid)
+  - B user가 다음 채팅방에 진입 -> deptMap의 이미 대기해있던 같은 학과 A의 uid값이 pop
+    - rooms - roomid - users - uid : department 값으로 저장 됨
+- A는 SplashActivity에서 ChatActivity로 진입 -> B는 바로 ChatActivity로 진입 함. (Toast : 사용자 2 입장)
+2. ChatActivity toolbar 사용, 우측 버튼으로 방 나가기, 상대방 신고 버튼 세팅.
+3. 학번, 비밀번호 미입력 하고 탈퇴하기 버튼 눌렀을 때 앱 종료 이슈 수정
+4. 자잘한 nullable 변수 변경
+
+- **2020/09/03** </br>
+1. ChatActitivy, SplashActivity 순서 정렬
+2. 이메일 인증이 안 됐음에도 Auth는 들어가 기존회원이라 인식하는 문제 해결
+3. 채팅 중 매칭 종료 기능 구현
+  - ISSUE#19 ChatActivity 매칭 종료 시 다른 roomid를 가진 사용자의 방과 randomRoomId가 초기화 되는 현상.
+  - ISSUE#20 ChatFragment 진입시 앱이 종료되는 현상( activity에서 fragment로 보내는 bundle때문에 일어나는 것으로 확인)
+  - ISSUE#14 SplashActivity Issue. 
