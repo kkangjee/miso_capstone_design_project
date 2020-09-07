@@ -70,4 +70,4 @@ Notification 기능 구현
 3. 채팅 중 매칭 종료 기능 구현
   - ~~ISSUE#19 ChatActivity 매칭 종료 시 다른 roomid를 가진 사용자의 방과 randomRoomId가 초기화 되는 현상.~~
   - ISSUE#20 ChatFragment 진입시 앱이 종료되는 현상( activity에서 fragment로 보내는 bundle때문에 일어나는 것으로 확인)
-  - ISSUE#14 SplashActivity Issue. 
+  - ~~ISSUE#14 SplashActivity Issue. ~~
