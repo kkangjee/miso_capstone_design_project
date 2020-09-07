@@ -103,12 +103,7 @@ class SplashActivity : AppCompatActivity() {
             userRef.child("rooms").child(getRoomId!!)
                 .addChildEventListener(object : ChildEventListener {
                     override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {}
-                    override fun onChildChanged(
-                        snapshot: DataSnapshot,
-                        previousChildName: String?
-                    ) {
-                    }
-
+                    override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
                     override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
                     override fun onCancelled(error: DatabaseError) {}
                     override fun onChildRemoved(snapshot: DataSnapshot) {

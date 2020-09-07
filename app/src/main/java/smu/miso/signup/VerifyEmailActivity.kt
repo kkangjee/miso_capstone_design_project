@@ -81,17 +81,10 @@ class VerifyEmailActivity : AppCompatActivity() {
 
         //학교 이메일로 인증된 사용자인지 확인
         Confirm.setOnClickListener {
-            if (auth == null) {  //사용자 없을시
-                Toast.makeText(
-                    this@VerifyEmailActivity,
-                    "사용자가 없습니다. 완전 오류",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else { // 사용자 있을 시 다시 불러옴
-                user?.reload()
-                    ?.addOnSuccessListener {
-                    }
-            }
+            user?.reload()
+                ?.addOnSuccessListener {
+                    Log.d("학교 이메일 인증","완료")
+                }
             when (verifiedEmail()) {
                 true -> {
                     userIsVerified.setText(R.string.email_verified)
