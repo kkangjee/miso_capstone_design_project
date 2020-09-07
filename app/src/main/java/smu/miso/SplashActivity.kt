@@ -26,6 +26,7 @@ class SplashActivity : AppCompatActivity() {
 
 
         end_button.setOnClickListener {
+            stopSearching()
             Toast.makeText(this, "대기상태 종료", Toast.LENGTH_LONG).show()
             finish()
         }
@@ -33,7 +34,6 @@ class SplashActivity : AppCompatActivity() {
         if (intent.hasExtra("splash_room_id")) {//user1
             getRoomId = intent.getStringExtra("splash_room_id")
 
-            //end_button.text = getRoomId
             userRef.child("rooms").child(getRoomId!!).child("users").addValueEventListener(object :
                 ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -55,11 +55,24 @@ class SplashActivity : AppCompatActivity() {
             })
 
         } else {//user2
-            Toast.makeText(this, "사용자가 입/*/*/*/**/*/*/*/장했습니다. 채팅을 엽니다.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "사용자가 입장했습니다. 채팅을 엽니다.", Toast.LENGTH_LONG).show()
             finish()
         }
         lookUpRooms()
 
+    }
+
+    fun stopSearching(){
+        if (getRoomId != null) {
+            exitRoom(getRoomId!!)
+            finish()
+        } else {
+            Toast.makeText(
+                this,
+                "룸 아이디 가져오기 실패, 오류발생",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun onBackPressed() {
@@ -72,17 +85,7 @@ class SplashActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
         } else {
-            if (getRoomId != null) {
-                exitRoom(getRoomId!!)
-                finish()
-            } else {
-                Toast.makeText(
-                    this,
-                    "룸 아이디 가져오기 실패, 오류발생",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
+            stopSearching()
         }
     }
 
