@@ -34,8 +34,13 @@ class ChatActivity : AppCompatActivity() {
         //채팅방 상태를 조회하여 채팅 방을 한명이라도 나가면 방을 폭파
         lookUpRooms()
 
-        // chatting area
+        val fragobj = ChatFragment()
+        val bundle = Bundle()
+        bundle.putString("roomID", roomID)
+        fragobj.setArguments(bundle)
+        //chatting area
         supportFragmentManager.beginTransaction()
+            //.replace(R.id.mainFragment, ChatFragment())
             .replace(R.id.mainFragment, ChatFragment())
             .commit()
     }
@@ -112,6 +117,10 @@ class ChatActivity : AppCompatActivity() {
         val intent = Intent(this@ChatActivity, HomeActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    fun getMyData(): String { //roomID반환함수
+        return roomID
     }
 }
 

@@ -6,7 +6,8 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 
 object CloudFunctions{
-    fun hideKeyboard(mActivity: Activity){
+
+    fun hideKeyboard(mActivity: Activity){ //Activity
         val view = mActivity.currentFocus
         if(view != null){
             val imm = mActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -14,7 +15,7 @@ object CloudFunctions{
         }
     }
 
-    fun hideKeyboard(context: Context?, view: View?) {
+    fun hideKeyboard(context: Context?, view: View?) { //Fragment
         val imm = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         if (view != null) {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0)
