@@ -1,5 +1,6 @@
 package smu.miso.Chat
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +27,9 @@ class ChatFragment: Fragment()  {
     private val database = FirebaseDatabase.getInstance()
     private val userRef = database.reference
 
+    @SuppressLint("SimpleDateFormat")
     private val dateFormatDay = SimpleDateFormat("yyyy-MM-dd")
+    @SuppressLint("SimpleDateFormat")
     private val dateFormatHour = SimpleDateFormat("aa hh:mm")
 
     //private var recyclerView: RecyclerView? = null
@@ -47,7 +50,7 @@ class ChatFragment: Fragment()  {
         super.onViewCreated(view, savedInstanceState)
 
         sendBtn.setOnClickListener {
-            var msg : String = msg_input.getText().toString()
+            var msg : String = msg_input.text.toString()
             sendMessage(msg, "0")
             msg_input.setText("")
         }
@@ -105,5 +108,5 @@ class ChatFragment: Fragment()  {
 //
 //                override fun onCancelled(databaseError: DatabaseError) {}
 //            })
-    }
+}
 }

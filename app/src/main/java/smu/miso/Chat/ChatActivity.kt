@@ -19,6 +19,7 @@ class ChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+
         val splashIntent = Intent(this, SplashActivity::class.java)
         startActivity(splashIntent)
         supportActionBar!!.setDisplayShowTitleEnabled(false) // 타이틀 안보이게 하기
@@ -28,6 +29,7 @@ class ChatActivity : AppCompatActivity() {
         lookUpRooms()
         val fragobj = ChatFragment()
         val bundle = Bundle()
+
         bundle.putString("roomID", roomID)
         fragobj.arguments = bundle
         //chatting area
