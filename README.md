@@ -20,7 +20,7 @@ Fragment 간 액티비티 전환 구현</br>
 Notification 기능 구현
 
 - **2020/07/26** </br>
-~~0. Apache License 2.0 출처 명시~~
+0. ~~Apache License 2.0 출처 명시~~
 1. Main2Activity - 로그인 화면배치, 기능 변경
 2. 회원정보 한글로 변경
 3. 태그 목록 ScrollView로 구현하여 조작성 확보
