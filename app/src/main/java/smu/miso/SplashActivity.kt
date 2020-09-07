@@ -22,15 +22,19 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        //대기화면에서 대기상태 종료하는 조건은 2가지
+        //1. 종료 버튼을 누른다
+        //2. 뒤로가기 버튼을 두번 누른다
         supportActionBar!!.setDisplayShowTitleEnabled(false) // 타이틀 안보이게 하기
 
-
+        //1. 종료 버튼을 누른다
         end_button.setOnClickListener {
             stopSearching()
             Toast.makeText(this, "대기상태 종료", Toast.LENGTH_LONG).show()
             finish()
         }
 
+        //ChatActivity에서 room id를 받아온다
         if (intent.hasExtra("splash_room_id")) {//user1
             getRoomId = intent.getStringExtra("splash_room_id")
 
@@ -39,7 +43,8 @@ class SplashActivity : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     var cnt = 0
                     department = snapshot.child(uid).value.toString()
-                    Log.d("SplashActivity", "department: $department")
+
+                    //두명이 채팅방에 들어왓을 때 실행 됨
                     for (singleSnapshot in snapshot.children) {
                         cnt++
                         if (cnt == 2) {
@@ -62,7 +67,8 @@ class SplashActivity : AppCompatActivity() {
 
     }
 
-    fun stopSearching(){
+    //탐색을 종료하는 코드
+    fun stopSearching() {
         if (getRoomId != null) {
             exitRoom(getRoomId!!)
             finish()
@@ -75,8 +81,9 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
+    //2. 뒤로가기 버튼을 두번 누른다
+    //뒤로가기 버튼 두번 클릭 시 탐색 종료
     override fun onBackPressed() {
-        // 뒤로가기 버튼 클릭
         if (System.currentTimeMillis() - mBackWait >= 2000) {
             mBackWait = System.currentTimeMillis()
             Toast.makeText(
@@ -89,6 +96,7 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
+    //방을 나가는 메소드
     private fun exitRoom(roomID: String) {
         //TODO: 가져온 roomid로 rooms의 방 폭파
         userRef.child("rooms").child(roomID).setValue(null)
@@ -98,6 +106,7 @@ class SplashActivity : AppCompatActivity() {
         finish()
     }
 
+    //사용자의 randomRoomId을 null로 초기화한다.
     private fun lookUpRooms() {
         if (getRoomId != null) {
             userRef.child("rooms").child(getRoomId!!)
