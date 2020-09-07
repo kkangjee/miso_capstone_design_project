@@ -1,5 +1,4 @@
 package smu.miso.Chat
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,8 +11,6 @@ import com.google.firebase.database.*
 import smu.miso.HomeActivity
 import smu.miso.R
 import smu.miso.SplashActivity
-
-
 class ChatActivity : AppCompatActivity() {
     var userRef = FirebaseDatabase.getInstance().reference
     var user = FirebaseAuth.getInstance().currentUser
@@ -25,14 +22,11 @@ class ChatActivity : AppCompatActivity() {
 
         val splashIntent = Intent(this, SplashActivity::class.java)
         startActivity(splashIntent)
-
         supportActionBar!!.setDisplayShowTitleEnabled(false) // 타이틀 안보이게 하기
-
         //roomid 가져오기
         getRoomId()
         //채팅방 상태를 조회하여 채팅 방을 한명이라도 나가면 방을 폭파
         lookUpRooms()
-
         val fragobj = ChatFragment()
         val bundle = Bundle()
 
@@ -44,12 +38,10 @@ class ChatActivity : AppCompatActivity() {
             .replace(R.id.mainFragment, ChatFragment())
             .commit()
     }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.item_setting_chatroom, menu)
         return true
     }
-
     //채팅방 설정
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle presses on the action bar items
@@ -66,7 +58,6 @@ class ChatActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
     private fun getRoomId() {
         //TODO :자신이 매칭된 채팅방 roomId 가져오기.
         //users - uid - ramdomRoomId
@@ -76,13 +67,11 @@ class ChatActivity : AppCompatActivity() {
                     roomID = roomIDsnapShot.value.toString()
                     Log.d("roomid 가져오기", roomID)
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     Log.d("roomid 가져오기", "실패")
                 }
             })
     }
-
     private fun lookUpRooms() {
         userRef.child("rooms").child(roomID).addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {}
@@ -101,7 +90,6 @@ class ChatActivity : AppCompatActivity() {
             }
         })
     }
-
     private fun exitRoom(roomID: String) {
         //TODO: 가져온 roomid로 rooms의 방 폭파
         userRef.child("rooms").child(roomID).setValue(null)
@@ -109,10 +97,9 @@ class ChatActivity : AppCompatActivity() {
         userRef.child("users").child(user?.uid.toString()).child("randomRoomId").setValue("")
         finish()
     }
-
     fun getMyData(): String { //roomID반환함수
         return roomID
     }
+
+
 }
-
-
