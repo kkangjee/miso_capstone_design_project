@@ -22,7 +22,6 @@ class ChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
-        //supportActionBar?.hide()
 
         val splashIntent = Intent(this, SplashActivity::class.java)
         startActivity(splashIntent)
@@ -36,8 +35,9 @@ class ChatActivity : AppCompatActivity() {
 
         val fragobj = ChatFragment()
         val bundle = Bundle()
+
         bundle.putString("roomID", roomID)
-        fragobj.setArguments(bundle)
+        fragobj.arguments = bundle
         //chatting area
         supportFragmentManager.beginTransaction()
             //.replace(R.id.mainFragment, ChatFragment())
@@ -97,8 +97,6 @@ class ChatActivity : AppCompatActivity() {
                     "매칭이 종료되었습니다. 새로운 채팅을 시작하세요",
                     Toast.LENGTH_LONG
                 ).show()
-                val intent = Intent(this@ChatActivity, HomeActivity::class.java)
-                startActivity(intent)
                 finish()
             }
         })
@@ -109,13 +107,6 @@ class ChatActivity : AppCompatActivity() {
         userRef.child("rooms").child(roomID).setValue(null)
         //TODO: users의 자신 randomRoomId 값 초기화
         userRef.child("users").child(user?.uid.toString()).child("randomRoomId").setValue("")
-        Toast.makeText(
-            this@ChatActivity,
-            "매칭이 종료되었습니다. 새로운 채팅을 시작하세요",
-            Toast.LENGTH_LONG
-        ).show()
-        val intent = Intent(this@ChatActivity, HomeActivity::class.java)
-        startActivity(intent)
         finish()
     }
 
