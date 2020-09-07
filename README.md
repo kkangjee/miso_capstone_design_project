@@ -75,3 +75,7 @@ Notification 기능 구현
 - **2020/09/07** </br>
 1. 채팅 방 나가기 구현 완료
 2. splashactivity- 뒤로가기 종료 시 서버에 있는 채팅 관련 정보 삭제, 개인 randomroomid 삭제
+3. ISSUE #24 RecyclerView issue
+    - 현재 ChatFragment에서 메시지를 보낼 때 본인 및 상대방의 recyclerview에 반영이 안되는 issue
+      => recyclerview 생성에 관한 문제
+4. FCM 푸시 알람 테스트
