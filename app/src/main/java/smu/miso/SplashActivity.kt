@@ -7,8 +7,13 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_splash.*
+import org.json.JSONObject
 import smu.miso.Chat.ChatActivity
+import java.io.OutputStream
+import java.net.HttpURLConnection
+import java.net.URL
 
 class SplashActivity : AppCompatActivity() {
     var mBackWait: Long = 0
@@ -17,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
     private val uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
     private var getRoomId: String? = ""
     private var department: String? = ""
-
+    var myToken : String = FirebaseInstanceId.getInstance().getToken().toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -43,6 +48,7 @@ class SplashActivity : AppCompatActivity() {
                     for (singleSnapshot in snapshot.children) {
                         cnt++
                         if (cnt == 2) {
+                            CloudFunctions.sendFCM(myToken)
                             finish()
                             val nextIntent = Intent(this@SplashActivity, ChatActivity::class.java)
                             startActivity(nextIntent)
