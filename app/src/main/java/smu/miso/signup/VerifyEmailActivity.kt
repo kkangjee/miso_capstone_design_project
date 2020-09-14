@@ -12,7 +12,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_verify_email.*
 import smu.miso.CloudFunctions
-import smu.miso.signup.verifiedEmail
 import smu.miso.MainActivity
 import smu.miso.R
 import smu.miso.model.UserModel

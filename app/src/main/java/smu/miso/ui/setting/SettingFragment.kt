@@ -67,8 +67,8 @@ class SettingFragment : Fragment() {
                             emailVerifiedValue?.text = "인증 실패"
                         }
 
-                        uidValue.text = uid
-                        departmentValue.text = department
+                        uidValue?.text = uid
+                        departmentValue?.text = department
                     }
 
                     override fun onCancelled(p0: DatabaseError) {

@@ -1,18 +1,21 @@
 package smu.miso
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import smu.miso.signup.SignUpActivity
 import smu.miso.signup.VerifyEmailActivity
 import smu.miso.signup.verifiedEmail
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     var mBackWait: Long = 0
@@ -23,9 +26,9 @@ class MainActivity : AppCompatActivity() {
     //현재 로그인 된 유저 정보를 담을 변수
     private val user = auth.currentUser
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
 
@@ -109,6 +112,9 @@ class MainActivity : AppCompatActivity() {
             ).show()
         } else {
             finish()
+        }
+        mainview.setOnClickListener{
+            CloudFunctions.hideKeyboard(this)
         }
     }
 }
