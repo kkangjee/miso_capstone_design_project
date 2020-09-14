@@ -2,7 +2,6 @@ package smu.miso.signup
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -59,7 +58,7 @@ class SignUpEmailActivity : AppCompatActivity() {
                 else {
                     val currentUser = auth.currentUser
                     //auth는 등록됐고, email인증이 안 됐다면, 이메일 인증 화면으로 다시 가게끔
-                    if(verifiedEmail() == false && currentUser != null){
+                    if(!verifiedEmail() && currentUser != null){
                         currentUser.updatePassword(password)
                         moveNextPage()
                     }
