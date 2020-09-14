@@ -1,15 +1,13 @@
 package smu.miso.ui.randomchat
+
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils.replace
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
@@ -17,12 +15,17 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.fragment_randomchat.*
+import org.json.JSONObject
 import smu.miso.Chat.ChatActivity
-import smu.miso.Chat.ChatFragment
-import smu.miso.HomeActivity
+import smu.miso.CloudFunctions
 import smu.miso.R
 import smu.miso.SplashActivity
+import java.io.OutputStream
+import java.net.HttpURLConnection
+import java.net.URL
+
 
 class RandomChatFragment : Fragment() {
     //전역 변수 설정 공간
@@ -30,6 +33,8 @@ class RandomChatFragment : Fragment() {
     private val database = FirebaseDatabase.getInstance()
     private val userRef = database.reference
     private val uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
+
+    var myToken : String = FirebaseInstanceId.getInstance().getToken().toString()
 
     var selectedUsers: HashMap<String, String> = HashMap<String, String>() //사용자 2명이 들어갈 공간
     var roomID: String? = null
@@ -84,10 +89,32 @@ class RandomChatFragment : Fragment() {
         }
     }
 
+    //현재 User가 randomRoomId가 있으면 바로 ChatActivity
+//    fun checkRoomId() {
+//        var roomid : String = ""
+//        userRef.child("users").child(uid).addListenerForSingleValueEvent(object :
+//            ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                roomid = snapshot.child("randomRoomId").value.toString()
+//                if(roomid != "") {
+//                    Log.d("룸 아이디가 있나요", roomid)
+//                    goChattingActivity()
+//                }
+//            }
+//            override fun onCancelled(error: DatabaseError) {
+//                Log.e("룸 아이디 가져오기", "실패")
+//            }
+//        })
+//
+//    }
     //학과별 설정
     private fun setDepartmentUsers() {
         var department: String = ""
         var deptKey: String = ""
+        var token : String = "" //상대방의 token을 담을 변수
+
+        //checkRoomId()
+
         userRef.child("users").child(uid).addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -124,18 +151,17 @@ class RandomChatFragment : Fragment() {
                             goSplashActivity()
                         }
                     userRef.child("deptMap").child(department).setValue(roomID)
-
                 } else {
                     //이미 존재하는 roodID 값을 타고 방으로 들어간다. 그리고 value값을 비운다.
                     Log.d("매칭 대기 중인 사용자 여부", "확인")
                     userRef.child("users").child(uid).child("randomRoomId").setValue(deptKey)
+
                     userRef.child("rooms/$deptKey").child("users")
                         .child(uid).setValue(department).addOnSuccessListener {
                             goChattingActivity()
                         }
+
                     userRef.child("deptMap").child(department).setValue("")
-
-
                 }
             }
             override fun onCancelled(error: DatabaseError) {
@@ -143,10 +169,14 @@ class RandomChatFragment : Fragment() {
             }
         })
     }
+
     //전체과 설정
     private fun setAllDepartmentUsers() {
         var deptKey = ""
         val allDept = "전체학과"
+
+        //checkRoomId()
+
         userRef.child("deptMap").addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -184,9 +214,9 @@ class RandomChatFragment : Fragment() {
                         }
                     userRef.child("deptMap").child(allDept).setValue("")
 
-
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
             }
         })

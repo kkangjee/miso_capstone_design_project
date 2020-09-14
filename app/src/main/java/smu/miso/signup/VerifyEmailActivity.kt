@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_verify_email.*
 import smu.miso.CloudFunctions
 import smu.miso.signup.verifiedEmail
@@ -23,7 +24,7 @@ class VerifyEmailActivity : AppCompatActivity() {
     private val auth = FirebaseAuth.getInstance()
     private val user = auth.currentUser
     private val userRef = FirebaseDatabase.getInstance().reference
-
+    private val token = FirebaseInstanceId.getInstance().getToken()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verify_email)
