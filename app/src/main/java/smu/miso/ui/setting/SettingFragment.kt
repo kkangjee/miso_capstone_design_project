@@ -62,9 +62,9 @@ class SettingFragment : Fragment() {
 
                         emailValue?.text = "$studentId@sangmyung.kr"
                         if (emailVerified.toBoolean()) {
-                            emailVerifiedValue.text = "인증 완료"
+                            emailVerifiedValue?.text = "인증 완료"
                         } else {
-                            emailVerifiedValue.text = "인증 실패"
+                            emailVerifiedValue?.text = "인증 실패"
                         }
 
                         uidValue.text = uid

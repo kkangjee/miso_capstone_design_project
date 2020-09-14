@@ -69,5 +69,13 @@ Notification 기능 구현
 2. 이메일 인증이 안 됐음에도 Auth는 들어가 기존회원이라 인식하는 문제 해결
 3. 채팅 중 매칭 종료 기능 구현
   - ~~ISSUE#19 ChatActivity 매칭 종료 시 다른 roomid를 가진 사용자의 방과 randomRoomId가 초기화 되는 현상.~~
-  - ISSUE#20 ChatFragment 진입시 앱이 종료되는 현상( activity에서 fragment로 보내는 bundle때문에 일어나는 것으로 확인)
+  - ~~ISSUE#20 ChatFragment 진입시 앱이 종료되는 현상( activity에서 fragment로 보내는 bundle때문에 일어나는 것으로 확인)~~
   - ~~ISSUE#14 SplashActivity Issue.~~
+  
+- **2020/09/07** </br>
+1. 채팅 방 나가기 구현 완료
+2. splashactivity- 뒤로가기 종료 시 서버에 있는 채팅 관련 정보 삭제, 개인 randomroomid 삭제
+3. ISSUE #24 RecyclerView issue
+    - 현재 ChatFragment에서 메시지를 보낼 때 본인 및 상대방의 recyclerview에 반영이 안되는 issue
+      => recyclerview 생성에 관한 문제
+4. FCM 푸시 알람 테스트
