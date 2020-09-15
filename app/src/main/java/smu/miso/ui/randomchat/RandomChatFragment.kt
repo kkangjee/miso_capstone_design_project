@@ -1,4 +1,5 @@
 package smu.miso.ui.randomchat
+
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils.replace
@@ -33,6 +34,7 @@ class RandomChatFragment : Fragment() {
 
     var selectedUsers: HashMap<String, String> = HashMap<String, String>() //사용자 2명이 들어갈 공간
     var roomID: String? = null
+
     //기본 구성 함수(Don't touch)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,6 +51,7 @@ class RandomChatFragment : Fragment() {
         })
         return root
     }
+
     //무작위 사용자 설정
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,6 +66,7 @@ class RandomChatFragment : Fragment() {
 
 
     }
+
     //이하 메소드 부분
     //프래그먼트 설정
     //매칭 버튼을 눌렀을 때 채팅방 입장 (대기 중인 사용자도 채팅방 입장)
@@ -94,6 +98,7 @@ class RandomChatFragment : Fragment() {
                 department = snapshot.child("department").value.toString()
                 Log.d("과 끼리 학과 가져오기", department)
             }
+
             override fun onCancelled(error: DatabaseError) {
                 Log.e("학과 가져오기", "실패")
             }
@@ -138,11 +143,13 @@ class RandomChatFragment : Fragment() {
 
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
     }
+
     //전체과 설정
     private fun setAllDepartmentUsers() {
         var deptKey = ""
@@ -187,6 +194,7 @@ class RandomChatFragment : Fragment() {
 
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
             }
         })

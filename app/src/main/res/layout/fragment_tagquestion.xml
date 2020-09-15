@@ -12,6 +12,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/text_tagquestion"
             android:layout_width="match_parent"

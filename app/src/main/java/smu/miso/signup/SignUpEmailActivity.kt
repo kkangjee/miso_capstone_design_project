@@ -43,7 +43,7 @@ class SignUpEmailActivity : AppCompatActivity() {
                 createEmailID(email, password)
             }
         }
-        sign_up_email.setOnClickListener{
+        sign_up_email.setOnClickListener {
             CloudFunctions.hideKeyboard(this)
         }
     }
@@ -54,11 +54,10 @@ class SignUpEmailActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     moveNextPage()
-                }
-                else {
+                } else {
                     val currentUser = auth.currentUser
                     //auth는 등록됐고, email인증이 안 됐다면, 이메일 인증 화면으로 다시 가게끔
-                    if(!verifiedEmail() && currentUser != null){
+                    if (!verifiedEmail() && currentUser != null) {
                         currentUser.updatePassword(password)
                         moveNextPage()
                     }

@@ -56,7 +56,7 @@ class SignUpActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        sign_up.setOnClickListener{
+        sign_up.setOnClickListener {
             CloudFunctions.hideKeyboard(this)
         }
     }

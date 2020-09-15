@@ -22,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
     private val uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
     private var getRoomId: String? = ""
     private var department: String? = ""
-    var myToken : String = FirebaseInstanceId.getInstance().getToken().toString()
+    var myToken: String = FirebaseInstanceId.getInstance().getToken().toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -118,7 +118,12 @@ class SplashActivity : AppCompatActivity() {
             userRef.child("rooms").child(getRoomId!!)
                 .addChildEventListener(object : ChildEventListener {
                     override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {}
-                    override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
+                    override fun onChildChanged(
+                        snapshot: DataSnapshot,
+                        previousChildName: String?
+                    ) {
+                    }
+
                     override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
                     override fun onCancelled(error: DatabaseError) {}
                     override fun onChildRemoved(snapshot: DataSnapshot) {

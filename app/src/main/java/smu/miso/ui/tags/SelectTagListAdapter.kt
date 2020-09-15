@@ -10,10 +10,12 @@ import smu.miso.R
 import smu.miso.model.TagModel
 
 
-class SelectTagListAdapter(val context: TagsFragment, private val taglist: ArrayList<TagModel>) : BaseAdapter() {
+class SelectTagListAdapter(val context: TagsFragment, private val taglist: ArrayList<TagModel>) :
+    BaseAdapter() {
     @SuppressLint("ViewHolder", "InflateParams")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view : View = LayoutInflater.from(parent?.context).inflate(R.layout.item_select_taglist,null)
+        val view: View =
+            LayoutInflater.from(parent?.context).inflate(R.layout.item_select_taglist, null)
 
         // 위에서 생성된 view를 item_select_taglist 파일의 각 view와 연결하는 작업
         val tagName = view.findViewById<TextView>(R.id.selectTagNametv)

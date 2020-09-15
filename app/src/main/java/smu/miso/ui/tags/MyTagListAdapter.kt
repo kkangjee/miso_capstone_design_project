@@ -11,10 +11,11 @@ import android.widget.TextView
 import smu.miso.R
 import smu.miso.model.MyTagModel
 
-class MyTagListAdapter(val context: TagsFragment, private val mytaglist: ArrayList<MyTagModel>) : BaseAdapter() {
+class MyTagListAdapter(val context: TagsFragment, private val mytaglist: ArrayList<MyTagModel>) :
+    BaseAdapter() {
     @SuppressLint("ViewHolder", "InflateParams")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view : View = LayoutInflater.from(parent?.context).inflate(R.layout.item_mytaglist,null)
+        val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.item_mytaglist, null)
 
         //위에서 생성된 view를 item_my_taglist 파일의 각 view와 연결하는 작업
         val myTagName = view.findViewById<TextView>(R.id.tagNametv)

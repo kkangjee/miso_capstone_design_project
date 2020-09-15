@@ -13,11 +13,11 @@ import java.io.OutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
-object CloudFunctions{
+object CloudFunctions {
 
-    fun hideKeyboard(mActivity: Activity){ //Activity
+    fun hideKeyboard(mActivity: Activity) { //Activity
         val view = mActivity.currentFocus
-        if(view != null){
+        if (view != null) {
             val imm = mActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
@@ -32,7 +32,7 @@ object CloudFunctions{
 
 
     //TITLE과 Body 확인하세요
-    fun sendFCM(token : String) {
+    fun sendFCM(token: String) {
         Thread(Runnable() {
             try {
                 var API_URL_FCM: String = "https://fcm.googleapis.com/fcm/send"
@@ -58,10 +58,10 @@ object CloudFunctions{
                 notification.put("title", "알람")
                 notification.put("body", "방 생성이 완료됐음")
 
-                json.put("to",Token)
-                json.put("direct_book_ok",true)
+                json.put("to", Token)
+                json.put("direct_book_ok", true)
                 json.put("data", notification)
-                json.put("priority","high")
+                json.put("priority", "high")
 
                 val sendMsg = json.toString()
                 //아래의 로그는 보낸 메세지 쿼리문을 볼 수 있음
