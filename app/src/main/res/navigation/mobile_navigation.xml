@@ -9,7 +9,7 @@
         android:id="@+id/navigation_randomchat"
         android:name="smu.miso.ui.randomchat.RandomChatFragment"
         android:label="@string/title_randomchat"
-        tools:layout="@layout/fragment_randomchat" >
+        tools:layout="@layout/fragment_randomchat">
         <action
             android:id="@+id/action_navigation_home_to_navigation_tags"
             app:destination="@id/navigation_tags" />
@@ -19,7 +19,7 @@
         android:id="@+id/navigation_tags"
         android:name="smu.miso.ui.tags.TagsFragment"
         android:label="@string/title_tags"
-        tools:layout="@layout/fragment_tags" >
+        tools:layout="@layout/fragment_tags">
         <action
             android:id="@+id/action_navigation_tags_to_navigation_home"
             app:destination="@id/navigation_randomchat" />
@@ -29,10 +29,10 @@
     </fragment>
 
     <fragment
-    android:id="@+id/navigation_tagquestion"
-    android:name="smu.miso.ui.tagquestion.TagQuestionFragment"
-    android:label="@string/title_tagquestion"
-    tools:layout="@layout/fragment_tagquestion" >
+        android:id="@+id/navigation_tagquestion"
+        android:name="smu.miso.ui.tagquestion.TagQuestionFragment"
+        android:label="@string/title_tagquestion"
+        tools:layout="@layout/fragment_tagquestion">
         <action
             android:id="@+id/action_navigation_tagquestion_to_navigation_tags"
             app:destination="@id/navigation_tags" />
@@ -48,7 +48,7 @@
         android:id="@+id/navigation_setting"
         android:name="smu.miso.ui.setting.SettingFragment"
         android:label="@string/title_setting"
-        tools:layout="@layout/fragment_setting" >
+        tools:layout="@layout/fragment_setting">
         <action
             android:id="@+id/action_navigation_setting_to_navigation_tagquestion"
             app:destination="@id/navigation_tagquestion" />

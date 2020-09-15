@@ -23,7 +23,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private val TAG = "FirebaseService"
 
-    override fun onNewToken(token : String) {
+    override fun onNewToken(token: String) {
         Log.d(TAG, "Refreshed token : $token")
     }
 
@@ -31,18 +31,20 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         if (remoteMessage.data.size > 0) {
             val title = remoteMessage.data.get("title").toString()
             val body = remoteMessage.data.get("body").toString()
-            sendNotification(title,body)
+            sendNotification(title, body)
         }
         //추후에 이 title을 가지고 sendNotification 에서 ChatActivity를 intent 할 지,
         //TagChatActivity를 intent 할 지 정할것임!!!!
     }
 
     @SuppressLint("ObsoleteSdkInt")
-    private fun sendNotification(messageTitle : String, messageBody: String) {
-        Log.d("됐는가",messageBody)
-        val NOTIFICATION_ID : Int = 1001
-        createNotificationChannel(this, NotificationManagerCompat.IMPORTANCE_MAX,
-            false, "Example", "App notification channel") // 1
+    private fun sendNotification(messageTitle: String, messageBody: String) {
+        Log.d("됐는가", messageBody)
+        val NOTIFICATION_ID: Int = 1001
+        createNotificationChannel(
+            this, NotificationManagerCompat.IMPORTANCE_MAX,
+            false, "Example", "App notification channel"
+        ) // 1
         //getString(R.string.app_name) 이게 channel ID
         val channelId = "$packageName-${"Example"}" // 2
         val title = messageTitle //알람제목
@@ -50,7 +52,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val intent = Intent(baseContext, ChatActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        val pendingIntent = PendingIntent.getActivity(baseContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)    // 3
+        val pendingIntent = PendingIntent.getActivity(
+            baseContext,
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )    // 3
 
         val builder = NotificationCompat.Builder(this, channelId)  // 4
         builder.setSmallIcon(R.drawable.ic_dashboard_black_24dp)    // 5
@@ -63,8 +70,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val notificationManager = NotificationManagerCompat.from(this)
         notificationManager.notify(NOTIFICATION_ID, builder.build())    // 11
     }
-    fun createNotificationChannel(context: Context, importance: Int, showBadge: Boolean,
-                                  name: String, description: String) {
+
+    fun createNotificationChannel(
+        context: Context, importance: Int, showBadge: Boolean,
+        name: String, description: String
+    ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channelId = "${context.packageName}-$name"
             val channel = NotificationChannel(channelId, name, importance)

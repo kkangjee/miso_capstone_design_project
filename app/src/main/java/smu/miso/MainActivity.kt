@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         //배경을 누르면 키보드가 내려가게끔
-        mainview.setOnClickListener{
+        mainview.setOnClickListener {
             CloudFunctions.hideKeyboard(this)
         }
 
@@ -69,7 +69,9 @@ class MainActivity : AppCompatActivity() {
         //로그인 버튼 눌러 서비스 로그인
         bt_login.setOnClickListener {
 
-            if (inputStudentID.text.toString().isEmpty() || inputPassword.text.toString().isEmpty()) {
+            if (inputStudentID.text.toString().isEmpty() || inputPassword.text.toString()
+                    .isEmpty()
+            ) {
                 Toast.makeText(this, "학번 혹은 비밀번호를 반드시 입력하세요", Toast.LENGTH_SHORT).show()
             } else {
                 auth.signInWithEmailAndPassword(
@@ -113,7 +115,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             finish()
         }
-        mainview.setOnClickListener{
+        mainview.setOnClickListener {
             CloudFunctions.hideKeyboard(this)
         }
     }

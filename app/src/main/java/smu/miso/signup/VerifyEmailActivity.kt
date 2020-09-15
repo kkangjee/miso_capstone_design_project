@@ -83,7 +83,7 @@ class VerifyEmailActivity : AppCompatActivity() {
         Confirm.setOnClickListener {
             user?.reload()
                 ?.addOnSuccessListener {
-                    Log.d("학교 이메일 인증","완료")
+                    Log.d("학교 이메일 인증", "완료")
                 }
             when (verifiedEmail()) {
                 true -> {
@@ -122,7 +122,7 @@ class VerifyEmailActivity : AppCompatActivity() {
             }
         }
 
-        verify_email.setOnClickListener{
+        verify_email.setOnClickListener {
             CloudFunctions.hideKeyboard(this)
         }
     }

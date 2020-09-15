@@ -1,13 +1,10 @@
 package smu.miso.Chat
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -15,8 +12,8 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_chat.*
 import smu.miso.R
 import smu.miso.model.ChatModel
-import smu.miso.ui.randomchat.RandomChatViewModel
 import java.text.SimpleDateFormat
+import java.util.*
 
 class ChatFragment : Fragment() {
     //전역 변수 설정 공간
@@ -26,14 +23,9 @@ class ChatFragment : Fragment() {
     private val database = FirebaseDatabase.getInstance()
     private val userRef = database.reference
 
-    var messageList: ArrayList<String> = arrayListOf()
+    var messageList: ArrayList<ChatModel.Message> = arrayListOf()
     var chatAdapter: ChatFragmentAdapter? = null
 
-    @SuppressLint("SimpleDateFormat")
-    private val dateFormatDay = SimpleDateFormat("yyyy-MM-dd")
-
-    @SuppressLint("SimpleDateFormat")
-    private val dateFormatHour = SimpleDateFormat("aa hh:mm")
 
     //var bundle:Bundle? = arguments
 
@@ -45,6 +37,8 @@ class ChatFragment : Fragment() {
     ): View? {//여기까지
         //어떤 화면을 container(프레그먼트가 보여질 화면)에 보여질 것인지 설정
         val root = inflater.inflate(R.layout.fragment_chat, container, false)
+
+
 
         return root
     }
@@ -77,20 +71,45 @@ class ChatFragment : Fragment() {
                         .addValueEventListener(object : ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {
                                 messageList.clear()
+
                                 for (i in snapshot.children) {
+                                    //메시지 정보 가져오기
                                     userRef.child("rooms").child(randomRoomId).child("message")
-                                        .child(i.key.toString()).child("msg").addValueEventListener(object : ValueEventListener {
+                                        .child(i.key.toString()).addValueEventListener(object :
+                                            ValueEventListener {
                                             override fun onDataChange(msgsnapshot: DataSnapshot) {
-                                                messageList.add(msgsnapshot.value.toString())
+                                                //messageList.add(msgsnapshot.child("msg").value.toString())
+                                                var message: ChatModel.Message = ChatModel.Message()
+                                                //Log.d("ChatMessage", msgsnapshot.child("msg").value.toString())
+                                                try {
+                                                    message.uid = msgsnapshot.child("uid").getValue(
+                                                        String::class.java
+                                                    )!!
+                                                    message.msg = msgsnapshot.child("msg").getValue(
+                                                        String::class.java
+                                                    )!!
+                                                    message.msgtype =
+                                                        msgsnapshot.child("msgtype").getValue(
+                                                            String::class.java
+                                                        )!!
+                                                    message.timestamp =
+                                                        msgsnapshot.child("timestamp").getValue(
+                                                            Any::class.java
+                                                        )!!
+                                                    message.readUsers[msgsnapshot.child("uid")
+                                                        .getValue(
+                                                            String::class.java
+                                                        )!!] = true
+                                                } catch (e: KotlinNullPointerException) {
+                                                    Log.e("KotlinNull", e.toString())
+                                                }
+                                                messageList.add(message)
                                                 chatAdapter!!.notifyDataSetChanged()
                                             }
+
                                             override fun onCancelled(error: DatabaseError) {
                                             }
-
                                         })
-
-
-
                                 }
                                 chatAdapter!!.notifyDataSetChanged()
                             }
