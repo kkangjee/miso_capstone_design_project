@@ -2,6 +2,7 @@ package smu.miso.Chat
 
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,6 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_chat.*
 import smu.miso.R
 import smu.miso.model.ChatModel
-import java.text.SimpleDateFormat
 import java.util.*
 
 class ChatFragment : Fragment() {
@@ -36,22 +36,44 @@ class ChatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {//여기까지
         //어떤 화면을 container(프레그먼트가 보여질 화면)에 보여질 것인지 설정
-        val root = inflater.inflate(R.layout.fragment_chat, container, false)
-
-
-
-        return root
+        return inflater.inflate(R.layout.fragment_chat, container, false)
     }
 
     //버튼 등의 리스너를 달 때에는 onViewCreated안에 작성
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //전송 버튼 클릭 시 메시지 전송
         sendBtn.setOnClickListener {
-            var msg: String = msg_input.text.toString()
-            sendMessage(msg, "0")
-            msg_input.setText("")
+            val msg: String = msg_input.text.toString()
+            if (msg != "") {
+                sendMessage(msg!!, "0")
+                msg_input.setText("")
+            }
+
         }
+
+        //엔터 입력 시 메시지 전송
+        msg_input.setOnKeyListener(View.OnKeyListener { _, i, _ ->
+            when (i) {
+                KeyEvent.KEYCODE_ENTER -> {
+                    val msg: String = msg_input.text.toString()
+                    if (msg != "") {
+                        val msg: String = msg_input.text.trim().toString()
+                        sendMessage(msg, "0")
+                        msg_input.setText("")
+
+                    }
+                    return@OnKeyListener true
+                }
+            }
+            false
+        })
+
+
+
+
+
 
         chatAdapter = ChatFragmentAdapter(messageList, requireActivity())
         chatRecyclerView.layoutManager = LinearLayoutManager(this.requireActivity())
@@ -105,6 +127,7 @@ class ChatFragment : Fragment() {
                                                 }
                                                 messageList.add(message)
                                                 chatAdapter!!.notifyDataSetChanged()
+                                                chatRecyclerView.scrollToPosition(messageList.size - 1)
                                             }
 
                                             override fun onCancelled(error: DatabaseError) {
@@ -112,25 +135,17 @@ class ChatFragment : Fragment() {
                                         })
                                 }
                                 chatAdapter!!.notifyDataSetChanged()
+                                chatRecyclerView.scrollToPosition(messageList.size - 1)
                             }
 
                             override fun onCancelled(error: DatabaseError) {
                             }
-
                         })
-
-
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     Log.d("randomRoomId 가져오기", "실패")
                 }
             })
-
-
-        //messageList.add("test")
-        //서버에서 채팅 가져와서 리스트 만들어 여기에 연결하기
-
     }
 
     //사용자 설정 함수나 override함수들(onBackPressed같은거)은 여기에 작성
