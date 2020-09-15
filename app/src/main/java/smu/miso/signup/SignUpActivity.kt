@@ -60,5 +60,5 @@ class SignUpActivity : AppCompatActivity() {
             CloudFunctions.hideKeyboard(this)
         }
     }
-  
+
 }

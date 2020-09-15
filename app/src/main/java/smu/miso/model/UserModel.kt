@@ -8,7 +8,6 @@ class UserModel() {
     var department: String = ""
     var tags: ArrayList<String>? = null
     var randomRoomId: String = ""
-    var token : String = ""
 
     private var userPhoto: String = ""
     private var roodId: String? = null
@@ -20,7 +19,6 @@ class UserModel() {
         emailVerified: Boolean,
         department: String?,
         tags: ArrayList<String>?
-
     ) : this() {
         this.uid = uid
         this.studentId = studentId

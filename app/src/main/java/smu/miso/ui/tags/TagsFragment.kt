@@ -115,50 +115,50 @@ class TagsFragment : Fragment() {
                         myTagListAdapter.notifyDataSetChanged()
 
                         if (mytaglistView != null) {
-                        tagRef.child("users").child(user?.uid.toString()).child("mytaglist")
-                            .addListenerForSingleValueEvent(object : ValueEventListener {
-                                override fun onDataChange(snapshot: DataSnapshot) {
-                                    for (i in snapshot.children) {
-                                        if (i.toString() == selectTagListAdapter.getItem(
-                                                position
-                                            ).tagName
-                                        ) {
-                                            Toast.makeText(
-                                                context,
-                                                "이미 존재하는 태그입니다.",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                            alertDialog.dismiss()
-                                        } else {
-                                            mytaglist.add(
-                                                MyTagModel(
-                                                    tagNameInfo,
-                                                    tagTypeInfo,
-                                                    true
-                                                )
-                                            )
-                                            tagRef.child("users").child(user?.uid.toString())
-                                                .child("mytaglist")
-                                                .child(selectedTagName[1])
-                                                .setValue(
+                            tagRef.child("users").child(user?.uid.toString()).child("mytaglist")
+                                .addListenerForSingleValueEvent(object : ValueEventListener {
+                                    override fun onDataChange(snapshot: DataSnapshot) {
+                                        for (i in snapshot.children) {
+                                            if (i.toString() == selectTagListAdapter.getItem(
+                                                    position
+                                                ).tagName
+                                            ) {
+                                                Toast.makeText(
+                                                    context,
+                                                    "이미 존재하는 태그입니다.",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                                alertDialog.dismiss()
+                                            } else {
+                                                mytaglist.add(
                                                     MyTagModel(
                                                         tagNameInfo,
                                                         tagTypeInfo,
                                                         true
                                                     )
                                                 )
-                                            alertDialog.dismiss()
-                                            myTagListAdapter.notifyDataSetChanged()
+                                                tagRef.child("users").child(user?.uid.toString())
+                                                    .child("mytaglist")
+                                                    .child(selectedTagName[1])
+                                                    .setValue(
+                                                        MyTagModel(
+                                                            tagNameInfo,
+                                                            tagTypeInfo,
+                                                            true
+                                                        )
+                                                    )
+                                                alertDialog.dismiss()
+                                                myTagListAdapter.notifyDataSetChanged()
+                                            }
                                         }
                                     }
-                                }
 
-                                override fun onCancelled(error: DatabaseError) {
+                                    override fun onCancelled(error: DatabaseError) {
 
-                                }
-                            })
+                                    }
+                                })
 
-                    }
+                        }
 
                         //그냥 취소할 것이라면
                         val btnCancel = view.findViewById<Button>(R.id.btnCancel)
