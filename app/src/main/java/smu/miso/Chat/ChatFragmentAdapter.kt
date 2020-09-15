@@ -51,13 +51,13 @@ class ChatFragmentAdapter(val items: ArrayList<ChatModel.Message>, val context: 
         if (position == 0) {
             holder.itemView.divider_date.text = day
             holder.itemView.divider.visibility = View.VISIBLE
-            holder.itemView.divider.getLayoutParams().height = 60
+            holder.itemView.divider.layoutParams.height = 60
         }
 
         if (day != beforeDay && beforeDay != null) {
-            beforeViewHolder?.itemView?.divider_date?.setText(beforeDay)
-            beforeViewHolder?.itemView?.divider?.setVisibility(View.VISIBLE)
-            beforeViewHolder?.itemView?.divider?.getLayoutParams()?.height = 60
+            beforeViewHolder?.itemView?.divider_date?.text = beforeDay
+            beforeViewHolder?.itemView?.divider?.visibility = View.VISIBLE
+            beforeViewHolder?.itemView?.divider?.layoutParams?.height = 60
         }
         beforeViewHolder = holder
         beforeDay = day
