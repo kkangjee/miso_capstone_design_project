@@ -1,7 +1,7 @@
-## Miso Sangmyung Random Chat App
-### 상명대학교 컴퓨터과학과 Capstone Design 프로젝트입니다.
+## Miso:) Chat App
+### Capstone Design(Graduate Project) at Sangmyung University 2020
 
-### Project Contributors
+### Project Members
 DEPT | ROLE | NAME
 --- | --- | ---
 CS | Project Leader, Android Development | [문승재](https://github.com/msj0319 "@msj0319")
