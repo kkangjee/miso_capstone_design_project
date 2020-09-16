@@ -1,4 +1,4 @@
-## Miso:) Chat App
+## MISO:) Chat App
 ### Capstone Design(Graduate Project) at Sangmyung University 2020
 
 ### Project Members
@@ -10,6 +10,12 @@ CS | Requirements planning, Android Development| [박형찬](https://github.com/
 CS | Designer | [이우진]()
 CS | Android Development | [이호진](https://github.com/roycmlhj "@roycmlhj")
 
+### Use Configuration management tools
+- [GitHub](https://github.com/msj0319/miso_capstone_design_project "캡스톤디자인 프로젝트 Repository")
+### Use Collaboration tools
+- Slack
+### Use IDE, Language
+<img src = "https://user-images.githubusercontent.com/40822689/93378700-cc539000-f897-11ea-9a38-dff2878bd19e.png" width="50px"> <img src = "https://user-images.githubusercontent.com/40822689/93379498-dde96780-f898-11ea-8bdd-0ceb98c99e44.png" width="50px">
 
 
 ### History
