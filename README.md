@@ -15,7 +15,7 @@ CS | Android Development | [이호진](https://github.com/roycmlhj "@roycmlhj")
 ### Use Collaboration tools
 - Slack
 ### Use IDE, Language
-<img src = "https://user-images.githubusercontent.com/40822689/93378700-cc539000-f897-11ea-9a38-dff2878bd19e.png" width="50px"> <img src = "https://user-images.githubusercontent.com/40822689/93379498-dde96780-f898-11ea-8bdd-0ceb98c99e44.png" width="50px">
+[<img src = "https://user-images.githubusercontent.com/40822689/93378700-cc539000-f897-11ea-9a38-dff2878bd19e.png" width="50px">](https://developer.android.com/studio?hl=ko "안드로이드 스튜디오") [<img src = "https://user-images.githubusercontent.com/40822689/93379498-dde96780-f898-11ea-8bdd-0ceb98c99e44.png" width="50px">](https://kotlinlang.org/ "코틀린")
 
 
 ### History
