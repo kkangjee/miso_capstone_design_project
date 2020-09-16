@@ -14,6 +14,7 @@ import smu.miso.R
 import smu.miso.SplashActivity
 
 class ChatActivity : AppCompatActivity() {
+    var mBackWait: Long = 0
     var userRef = FirebaseDatabase.getInstance().reference
     var user = FirebaseAuth.getInstance().currentUser
     var roomID = ""
@@ -110,5 +111,29 @@ class ChatActivity : AppCompatActivity() {
         return roomID
     }
 
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() - mBackWait >= 2000) {
+            mBackWait = System.currentTimeMillis()
+            Toast.makeText(
+                this,
+                "뒤로가기 버튼을 한번 더 누르면 채팅이 종료 됩니다.",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            stopSearching()
 
+        }
+    }
+    fun stopSearching() {
+        if (roomID != null) {
+            exitRoom(roomID!!)
+            finish()
+        } else {
+            Toast.makeText(
+                this,
+                "룸 아이디 가져오기 실패, 오류발생",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 }
