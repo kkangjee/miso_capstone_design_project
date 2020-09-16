@@ -1,6 +1,18 @@
 ## Miso Sangmyung Random Chat App
 ### 상명대학교 컴퓨터과학과 Capstone Design 프로젝트입니다.
 
+### Project Contributors
+DEPT | ROLE | NAME
+--- | --- | ---
+CS | Project Leader, Android Development | [문승재](https://github.com/msj0319 "@msj0319")
+CS | Android Development | [강지훈](https://github.com/kkangjee "@kkangjee")
+CS | Requirements planning, Android Development| [박형찬](https://github.com/vkzlcks "@vkzlcks")
+CS | Designer | [이우진]()
+CS | Android Development | [이호진](https://github.com/roycmlhj "@roycmlhj")
+
+
+
+### History
   - **2020/04/18**
      - firebase 플랫폼의 real-time database 종속항목을 추가.
 
