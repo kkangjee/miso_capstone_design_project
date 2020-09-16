@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">miso_capstone_design_project</string>
+    <string name="app_name">미소:)</string>
     <string name="no_email_verified">아직 인증되지 않은 사용자 입니다.</string>
     <string name="email_verified">인증된 사용자 입니다.</string>
     <string name="title_randomchat">랜덤채팅</string>

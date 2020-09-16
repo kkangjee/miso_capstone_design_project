@@ -50,13 +50,17 @@
 
     <Button
         android:id="@+id/sndEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:layout_marginStart="176dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
         android:text="인증 메일 발송"
+        android:textColor="#3949AB"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintHorizontal_bias="0.368"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/studentIDText" />
 
@@ -137,7 +141,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="24dp"
+        android:background="#FFFFFF"
         android:text="확인"
+        android:textColor="#3949AB"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -155,12 +162,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <TextView
-        android:id="@+id/bt_gotoMain"
+        android:id="@+id/bt_gotoSelectTag"
         android:layout_width="107dp"
         android:layout_height="25dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="100dp"
-        android:text="로그인 하러가기"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="20dp"
+        android:text="다음 단계로 이동"
         android:textAlignment="center"
         android:textColor="#3F51B5"
         android:textStyle="bold"

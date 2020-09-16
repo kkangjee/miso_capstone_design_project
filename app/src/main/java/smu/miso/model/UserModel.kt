@@ -6,7 +6,7 @@ class UserModel() {
     var uid: String = ""
     var emailVerified: Boolean = false
     var department: String = ""
-    var tags: ArrayList<String>? = null
+    var tags = ArrayList<MyTagModel?>()
     var randomRoomId: String = ""
 
     private var userPhoto: String = ""
@@ -18,7 +18,7 @@ class UserModel() {
         studentId: String,
         emailVerified: Boolean,
         department: String?,
-        tags: ArrayList<String>?
+        tags: ArrayList<MyTagModel?>
     ) : this() {
         this.uid = uid
         this.studentId = studentId
@@ -33,7 +33,7 @@ class UserModel() {
         studentId: String,
         emailVerified: Boolean,
         department: String?,
-        tags: ArrayList<String>?,
+        tags: ArrayList<MyTagModel?>,
         randomRoomId: String?
     ) : this() {
         this.uid = uid

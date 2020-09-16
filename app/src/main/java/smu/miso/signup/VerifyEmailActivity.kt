@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.FirebaseInstanceId
+import kotlinx.android.synthetic.main.activity_sign_up_email.*
 import kotlinx.android.synthetic.main.activity_verify_email.*
 import smu.miso.CloudFunctions
 import smu.miso.MainActivity
@@ -29,13 +30,9 @@ class VerifyEmailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_verify_email)
         supportActionBar?.hide()
 
-        //SignUpEmailActivity 에서 학과 명 받아오기
-        val department: String? = intent.getStringExtra("department")
+        val studentID = intent.getStringExtra("studentID")
+        val department = intent.getStringExtra("department")
 
-        val uid: String = user?.uid.toString()
-        //val email: String? = user?.email
-
-        var studentID = intent.getStringExtra("studentID")
         if (!studentID.isNullOrEmpty()) {
             studentIDText.setText(studentID)
         } else {
@@ -72,9 +69,11 @@ class VerifyEmailActivity : AppCompatActivity() {
         userIsVerified.setText(R.string.no_email_verified)
         userIsVerified.setTextColor(Color.parseColor("#F44336"))
 
-        //이메일 인증까지 완료 시 MainActivity로 넘어가 로그인하도록 설정
-        bt_gotoMain.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+        //이메일 인증단계를 끝냈으면 태그 선택 액티비티로 이동
+        bt_gotoSelectTag.setOnClickListener {
+            val intent = Intent(this, SelectTagActivity::class.java)
+            intent.putExtra("studentID",studentIDText.text.toString())
+            intent.putExtra("department", department)
             startActivity(intent)
             finish()
         }
@@ -91,25 +90,13 @@ class VerifyEmailActivity : AppCompatActivity() {
                     userIsVerified.setTextColor(Color.parseColor("#4CAF50"))
 
                     Confirm.text = "완료"
-                    bt_gotoMain.visibility = View.VISIBLE
+                    bt_gotoSelectTag.visibility = View.VISIBLE
 
                     Toast.makeText(
                         this@VerifyEmailActivity,
-                        "계정 생성과 이메일 인증이 모두 완료되었습니다. 새로 로그인 하십시오",
+                        "계정 생성과 이메일 인증이 완료되었습니다.",
                         Toast.LENGTH_SHORT
                     ).show()
-
-                    //이메일 인증 까지 완료 되었으면 DB에 USER 객체 생성(emailVerfied 값을 true 로 DB에 전달)
-                    //기본 태그는 학과명으로 태그 설정
-                    if (studentID != null) {
-                        userRef.child("users").child(uid)
-                            .setValue(UserModel(uid, studentID, true, department, null))
-                            .addOnSuccessListener {
-                                Log.d("USER_INSERTED!!", "데이터베이스에 User 객체 생성 완료")
-                            }.addOnFailureListener {
-                                Log.d("USER_INSERTED_FAIL!!", "데이터베이스에 User 객체 생성 실패")
-                            }
-                    }
                 }
                 false -> {
                     Toast.makeText(
@@ -126,11 +113,4 @@ class VerifyEmailActivity : AppCompatActivity() {
             CloudFunctions.hideKeyboard(this)
         }
     }
-//    //이론상 이게 없어도 될 거 같음
-//    override fun onBackPressed() {
-//        // 뒤로가기 버튼 클릭
-//        user?.delete()
-//        val intent = Intent(this, SignUpEmailActivity::class.java)
-//        startActivity(intent)
-//    }
 }

@@ -15,33 +15,18 @@
         android:textColor="#3949AB"
         android:textSize="24sp"
         android:textStyle="bold" />
-
-    <ListView
-        android:id="@+id/taglistView"
-        android:layout_width="match_parent"
-        android:layout_height="360dp">
-
-    </ListView>
-
-    <LinearLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="나의 태그 리스트"
-            android:textColor="#3949AB"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <ListView
-            android:id="@+id/mytaglistView"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tagRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            >
 
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>
