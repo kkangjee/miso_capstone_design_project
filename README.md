@@ -14,9 +14,8 @@ CS | Android Development | [이호진](https://github.com/roycmlhj "@roycmlhj")
 - [GitHub](https://github.com/msj0319/miso_capstone_design_project "캡스톤디자인 프로젝트 Repository")
 ### Use Collaboration tools
 - Slack
-### Use IDE, Language
-[<img src = "https://user-images.githubusercontent.com/40822689/93378700-cc539000-f897-11ea-9a38-dff2878bd19e.png" width="50px">](https://developer.android.com/studio?hl=ko "안드로이드 스튜디오") [<img src = "https://user-images.githubusercontent.com/40822689/93379498-dde96780-f898-11ea-8bdd-0ceb98c99e44.png" width="50px">](https://kotlinlang.org/ "코틀린")
-
+### Use IDE, Language, API, Database
+[<img src = "https://user-images.githubusercontent.com/40822689/93378700-cc539000-f897-11ea-9a38-dff2878bd19e.png" width="69px">](https://developer.android.com/studio?hl=ko "안드로이드 스튜디오") [<img src = "https://user-images.githubusercontent.com/40822689/93379498-dde96780-f898-11ea-8bdd-0ceb98c99e44.png" width="69px">](https://kotlinlang.org/ "코틀린") [<img src = "https://user-images.githubusercontent.com/40822689/93382537-33c00e80-f89d-11ea-80a4-6dab94d17088.png" width="69px" height="69px">](https://firebase.google.cn/docs/auth/android/start?hl=ko "Firebase Authentication") [<img src = "https://user-images.githubusercontent.com/40822689/93382356-fb203500-f89c-11ea-95f9-56b3459d083d.png" width="69px" height="69px">](https://firebase.google.cn/docs/database/android/start?hl=ko "Firebase Realtime Database")
 
 ### History
   - **2020/04/18**
