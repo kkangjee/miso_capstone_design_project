@@ -87,14 +87,17 @@ class ChatActivity : AppCompatActivity() {
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
             override fun onCancelled(error: DatabaseError) {}
             override fun onChildRemoved(snapshot: DataSnapshot) {
-                userRef.child("users").child(user?.uid.toString()).child("randomRoomId")
-                    .setValue("")
-                Toast.makeText(
-                    this@ChatActivity,
-                    "매칭이 종료되었습니다. 새로운 채팅을 시작하세요",
-                    Toast.LENGTH_LONG
-                ).show()
-                finish()
+                if (snapshot.key.toString()==roomID){
+                    userRef.child("users").child(user?.uid.toString()).child("randomRoomId")
+                        .setValue("")
+                    Toast.makeText(
+                        this@ChatActivity,
+                        "매칭이 종료되었습니다. 새로운 채팅을 시작하세요",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    finish()
+                }
+
             }
         })
     }
