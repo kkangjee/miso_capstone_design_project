@@ -2,16 +2,11 @@ package smu.miso.ui.randomchat
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils.replace
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -20,8 +15,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_randomchat.*
 import smu.miso.Chat.ChatActivity
-import smu.miso.Chat.ChatFragment
-import smu.miso.HomeActivity
 import smu.miso.R
 import smu.miso.SplashActivity
 
@@ -44,12 +37,8 @@ class RandomChatFragment : Fragment() {
         randomchatViewModel =
             ViewModelProviders.of(this).get(RandomChatViewModel::class.java)
         //어떤 화면을 container(프레그먼트가 보여질 화면)에 보여질 것인지 설정
-        val root = inflater.inflate(R.layout.fragment_randomchat, container, false)
-        val textView: TextView = root.findViewById(R.id.text_randomchat)
-        randomchatViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+
+        return inflater.inflate(R.layout.fragment_randomchat, container, false)
     }
 
     //무작위 사용자 설정
