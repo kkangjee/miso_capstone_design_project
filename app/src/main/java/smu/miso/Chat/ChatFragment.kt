@@ -135,7 +135,10 @@ class ChatFragment : Fragment() {
                                         })
                                 }
                                 chatAdapter!!.notifyDataSetChanged()
-                                chatRecyclerView.scrollToPosition(messageList.size - 1)
+                                if(messageList.size>0){
+                                    chatRecyclerView.scrollToPosition(messageList.size - 1)
+                                }
+
                             }
 
                             override fun onCancelled(error: DatabaseError) {
