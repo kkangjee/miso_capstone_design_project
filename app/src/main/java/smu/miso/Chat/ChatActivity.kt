@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import smu.miso.HomeActivity
 import smu.miso.R
 import smu.miso.SplashActivity
 
@@ -123,20 +122,7 @@ class ChatActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
         } else {
-            stopSearching()
-
-        }
-    }
-    fun stopSearching() {
-        if (roomID != null) {
-            exitRoom(roomID!!)
-            finish()
-        } else {
-            Toast.makeText(
-                this,
-                "룸 아이디 가져오기 실패, 오류발생",
-                Toast.LENGTH_SHORT
-            ).show()
+            exitRoom(roomID)
         }
     }
 }
