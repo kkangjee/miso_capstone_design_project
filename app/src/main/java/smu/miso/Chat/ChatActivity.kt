@@ -103,7 +103,7 @@ class ChatActivity : AppCompatActivity() {
 
     private fun exitRoom(roomID: String) {
         //TODO: 가져온 roomid로 rooms의 방 폭파
-        userRef.child("rooms").child(roomID).setValue(null)
+        //userRef.child("rooms").child(roomID).setValue(null)
         //TODO: users의 자신 randomRoomId 값 초기화
         userRef.child("users").child(user?.uid.toString()).child("randomRoomId").setValue("")
         finish()
