@@ -17,7 +17,7 @@ import java.util.*
 
 class ChatFragment : Fragment() {
     //전역 변수 설정 공간
-    var roomID = ""
+    //var roomID = ""
     var randomRoomId = ""
     private val uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
     private val database = FirebaseDatabase.getInstance()
@@ -81,7 +81,7 @@ class ChatFragment : Fragment() {
         chatRecyclerView.adapter = chatAdapter
 
 
-        userRef.child("users").child(uid).child("randomRoomId").addValueEventListener(
+        userRef.child("users").child(uid).child("randomRoomId").addListenerForSingleValueEvent(
             object : ValueEventListener {
                 override fun onDataChange(roomIDsnapShot: DataSnapshot) {
                     randomRoomId = roomIDsnapShot.value.toString()
@@ -122,12 +122,15 @@ class ChatFragment : Fragment() {
                                                         .getValue(
                                                             String::class.java
                                                         )!!] = true
+                                                    messageList.add(message)
+                                                    chatAdapter!!.notifyDataSetChanged()
+                                                    if(messageList.size>0){
+                                                        chatRecyclerView.scrollToPosition(messageList.size - 1)
+                                                    }
                                                 } catch (e: KotlinNullPointerException) {
                                                     Log.e("KotlinNull", e.toString())
                                                 }
-                                                messageList.add(message)
-                                                chatAdapter!!.notifyDataSetChanged()
-                                                chatRecyclerView.scrollToPosition(messageList.size - 1)
+
                                             }
 
                                             override fun onCancelled(error: DatabaseError) {
@@ -154,7 +157,7 @@ class ChatFragment : Fragment() {
     //사용자 설정 함수나 override함수들(onBackPressed같은거)은 여기에 작성
     private fun sendMessage(msg: String, msgtype: String) {
         sendBtn.isEnabled = false
-
+        var roomID = ""
         var message: ChatModel.Message = ChatModel.Message()
         message.uid = uid
         message.msg = msg
@@ -163,20 +166,32 @@ class ChatFragment : Fragment() {
         message.readUsers[uid] = true
 
         //save message
-        val activity: ChatActivity = activity as ChatActivity
-        roomID = activity.getMyData()
+//        val activity: ChatActivity = activity as ChatActivity
+//        roomID = activity.getMyData()
 
         //recyclerView?.layoutManager = LinearLayoutManager(context)
         //  recyclerView?.adapter = RecyclerViewAdapter()
 
         //Toast.makeText(getActivity(), roomID, Toast.LENGTH_SHORT).show()
-        userRef.child("rooms").child(roomID).child("message").push().setValue(message)
-            .addOnCompleteListener {
-                sendBtn.isEnabled = true
 
-            }
-        //save last message
-        userRef.child("rooms").child(roomID).child("last_message").push().setValue(message)
+        userRef.child("users").child(uid).child("randomRoomId").addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(roomIDsnapShot: DataSnapshot) {
+                    roomID = roomIDsnapShot.value.toString()
+                    Log.d("randomRoomId 가져오기", randomRoomId)
+
+                    userRef.child("rooms").child(roomID).child("message").push().setValue(message)
+                        .addOnCompleteListener {
+                            sendBtn.isEnabled = true
+
+                        }
+                    //save last message
+                    userRef.child("rooms").child(roomID).child("last_message").push().setValue(message)
+                }override fun onCancelled(error: DatabaseError) {
+                    Log.d("randomRoomId 가져오기", "실패")
+                }
+            })
+
 
 
         // inc unread message count
