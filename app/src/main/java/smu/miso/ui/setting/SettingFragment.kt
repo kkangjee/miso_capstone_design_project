@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_setting.*
+import kotlinx.android.synthetic.main.item_chatmsg_left.view.*
 import smu.miso.CloudFunctions
 import smu.miso.MainActivity
 import smu.miso.R
@@ -63,9 +64,13 @@ class SettingFragment : Fragment() {
                         department = datasnapshot.child("department").value.toString()
 
                         //프로필 이미지 학과별로 설정
-                        mappingDeptProfile(department,profileImageView)
+
+                        if(profileImageView != null)
+                            mappingDeptProfile(department,profileImageView)
+
 
                         emailValue?.text = "$studentId@sangmyung.kr"
+
                         if (emailVerified.toBoolean()) {
                             emailVerifiedValue?.text = "인증 완료"
                         } else {
