@@ -1,18 +1,23 @@
 package smu.miso.ui.freetalk
 
 
+import android.R.attr.fragment
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_setting.*
 import kotlinx.android.synthetic.main.item_chatmsg_left.view.*
 import smu.miso.R
+import smu.miso.mappingDeptProfile
 import smu.miso.model.ChatModel
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class FreeTalkFragmentAdapter(val items: ArrayList<ChatModel.Message>, val context: Context) :
     RecyclerView.Adapter<FreeTalkFragmentAdapter.ViewHolder>() {
@@ -94,9 +99,30 @@ class FreeTalkFragmentAdapter(val items: ArrayList<ChatModel.Message>, val conte
             message: ChatModel.Message,
             context: Context
         ) {
+
+
+
+
+//            Log.d("times1", message.timestamp.toString())
+//            Log.d("times2", timeStamp[timeNum - 1].toInt().toString())
+            if (myUid != message.uid){
+                val timeStamp = message.timestamp.toString()
+                val timeNum = (message.timestamp.toString()).length
+
+                when (timeStamp[timeNum - 1].toInt() % 10) {
+                    in 0..3 -> itemView.msg_item.setTextColor(Color.parseColor("#FF0000"))
+                    in 4..6 -> itemView.msg_item.setTextColor(Color.parseColor("#00FF00"))
+                    else -> itemView.msg_item.setTextColor(Color.parseColor("#0000FF"))
+                }
+            }
+
             itemView.msg_item.text = message.msg
             itemView.divider_date.text = dateFormatDay.format(Date(message.timestamp as Long))
             itemView.timestamp.text = dateFormatHour.format(Date(message.timestamp as Long))
+
+            if(itemView.user_photo != null){
+                mappingDeptProfile(message.department,itemView.user_photo)
+            }
 
             itemView.setOnLongClickListener(listener)
         }

@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -30,7 +31,7 @@ class SettingFragment : Fragment() {
     private var uid = auth.uid
     private var user = auth.currentUser
     private var userRef = FirebaseDatabase.getInstance().reference
-
+    var department = ""
     //기본 구성 함수(Don't touch)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,6 +80,8 @@ class SettingFragment : Fragment() {
                         Log.w("READ FAILED", "Failed to read value")
                     }
                 })
+
+
         }
 
         //사용자 계정 로그아웃 함수
@@ -117,6 +120,11 @@ class SettingFragment : Fragment() {
             CloudFunctions.hideKeyboard(context, this.view)
         }
 
+    }
+
+    fun getDept(): String {
+        Log.d("학과확인",department)
+        return department
     }
 
     private fun deleteUser() {
