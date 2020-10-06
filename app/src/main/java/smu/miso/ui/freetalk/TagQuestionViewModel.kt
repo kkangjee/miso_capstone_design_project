@@ -1,4 +1,4 @@
-package smu.miso.ui.tagquestion
+package smu.miso.ui.freetalk
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
