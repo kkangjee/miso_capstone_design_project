@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_setting.*
 import smu.miso.CloudFunctions
 import smu.miso.MainActivity
 import smu.miso.R
+import smu.miso.mappingDeptProfile
 
 class SettingFragment : Fragment() {
     //전역 변수 설정 공간
@@ -59,6 +60,9 @@ class SettingFragment : Fragment() {
                         studentId = datasnapshot.child("studentId").value.toString()
                         emailVerified = datasnapshot.child("emailVerified").value.toString()
                         department = datasnapshot.child("department").value.toString()
+
+                        //프로필 이미지 학과별로 설정
+                        mappingDeptProfile(department,profileImageView)
 
                         emailValue?.text = "$studentId@sangmyung.kr"
                         if (emailVerified.toBoolean()) {
