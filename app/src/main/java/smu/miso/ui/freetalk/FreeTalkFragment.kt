@@ -13,7 +13,9 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_chat.*
 import smu.miso.R
 import smu.miso.model.ChatModel
-import java.util.ArrayList
+import smu.miso.ui.setting.SettingFragment
+import java.util.*
+
 
 class FreeTalkFragment : Fragment() {
     //전역 변수 설정 공간
@@ -27,7 +29,8 @@ class FreeTalkFragment : Fragment() {
     var messageList: ArrayList<ChatModel.Message> = arrayListOf()
     var chatAdapter: FreeTalkFragmentAdapter? = null
 
-    val resetCount = 10
+    val resetCount = 100
+    var department = ""
 
     //기본 구성 함수(Don't touch)
     override fun onCreateView(
@@ -102,6 +105,10 @@ class FreeTalkFragment : Fragment() {
                                         message.msg = msgsnapshot.child("msg").getValue(
                                             String::class.java
                                         )!!
+                                        message.department =
+                                            msgsnapshot.child("department").getValue(
+                                                String::class.java
+                                            )!!
                                         message.msgtype =
                                             msgsnapshot.child("msgtype").getValue(
                                                 String::class.java
@@ -121,8 +128,11 @@ class FreeTalkFragment : Fragment() {
                                         }
                                         //채팅이 많이 쌓였다면 초기화
                                         if (messageList.size > resetCount) {
-                                            Log.d("messageList","호출")
-                                            userRef.child("rooms").child(freeTalk).child("message").setValue(null)
+                                            Log.d("messageList", "호출")
+                                            userRef.child("rooms").child(freeTalk).child("message")
+                                                .setValue(
+                                                    null
+                                                )
                                         }
                                     } catch (e: KotlinNullPointerException) {
                                         Log.e("KotlinNull", e.toString())
@@ -152,19 +162,32 @@ class FreeTalkFragment : Fragment() {
     //사용자 설정 함수나 override함수들(onBackPressed같은거)은 여기에 작성
     private fun sendMessage(msg: String, msgtype: String) {
         sendBtn.isEnabled = false
-        //var roomID = ""
-        var message: ChatModel.Message = ChatModel.Message()
-        message.uid = uid
-        message.msg = msg
-        message.msgtype = msgtype
-        message.timestamp = ServerValue.TIMESTAMP
-        message.readUsers[uid] = true
+        //department = (fragment as SettingFragment).getDept()
+        userRef.child("users").child(uid).child("department").addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(roomIDsnapShot: DataSnapshot) {
+                    department = roomIDsnapShot.value.toString()
+                    var message: ChatModel.Message = ChatModel.Message()
+                    message.uid = uid
+                    message.msg = msg
+                    message.msgtype = msgtype
+                    message.timestamp = ServerValue.TIMESTAMP
+                    message.readUsers[uid] = true
+                    message.department = department
 
-        userRef.child("rooms").child(freeTalk).child("message").push().setValue(message)
-            .addOnCompleteListener {
-                sendBtn.isEnabled = true
 
-            }
+                    userRef.child("rooms").child(freeTalk).child("message").push().setValue(message)
+                        .addOnCompleteListener {
+                            sendBtn.isEnabled = true
+
+                        }
+                    Log.d("sex", department)
+
+                }override fun onCancelled(error: DatabaseError) {
+                    Log.d("randomRoomId 가져오기", "실패")
+                }
+            })
+
 
 
     }
