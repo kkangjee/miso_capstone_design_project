@@ -26,9 +26,6 @@ class ChatFragment : Fragment() {
     var messageList: ArrayList<ChatModel.Message> = arrayListOf()
     var chatAdapter: ChatFragmentAdapter? = null
 
-
-    //var bundle:Bundle? = arguments
-
     //기본 구성 함수(Don't touch)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -129,6 +126,8 @@ class ChatFragment : Fragment() {
                                                     }
                                                 } catch (e: KotlinNullPointerException) {
                                                     Log.e("KotlinNull", e.toString())
+                                                } catch (e: NullPointerException){
+                                                    Log.e("NullPointerException", e.toString())
                                                 }
 
                                             }

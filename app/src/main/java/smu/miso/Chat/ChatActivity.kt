@@ -9,8 +9,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.fragment_chat.*
 import smu.miso.R
 import smu.miso.SplashActivity
+import smu.miso.model.ChatModel
+import java.util.*
+
 
 class ChatActivity : AppCompatActivity() {
     var mBackWait: Long = 0
@@ -57,10 +61,31 @@ class ChatActivity : AppCompatActivity() {
             }
             //TODO: 상대방 신고하기 기능 (개발 예정)
             R.id.action_opponent_alert -> {
-                Toast.makeText(this, "상대방을 신고", Toast.LENGTH_SHORT).show()
+                //reportOpponent()
+                moveRecord(userRef.child("rooms").child(roomID).child("message"),userRef.child("report").child(roomID))
+
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+
+    private fun moveRecord(fromPath: DatabaseReference, toPath: DatabaseReference) {
+        val valueEventListener: ValueEventListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                toPath.setValue(dataSnapshot.value).addOnCompleteListener { task ->
+                    if (task.isComplete) {
+                        Toast.makeText(this@ChatActivity, "관리자가 검토하도록 하겠습니다", Toast.LENGTH_SHORT).show()
+                        finish()
+                    } else {
+                        Toast.makeText(this@ChatActivity, "신고에 실패하였습니다. 다시 시도해주세요", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        }
+        fromPath.addListenerForSingleValueEvent(valueEventListener)
     }
 
     private fun getRoomId() {
@@ -86,7 +111,7 @@ class ChatActivity : AppCompatActivity() {
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
             override fun onCancelled(error: DatabaseError) {}
             override fun onChildRemoved(snapshot: DataSnapshot) {
-                if (snapshot.key.toString()==roomID){
+                if (snapshot.key.toString() == roomID) {
                     userRef.child("users").child(user?.uid.toString()).child("randomRoomId")
                         .setValue("")
                     Toast.makeText(
