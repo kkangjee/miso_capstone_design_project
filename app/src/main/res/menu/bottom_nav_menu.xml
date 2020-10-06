@@ -6,10 +6,6 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_randomchat" />
 
-    <item
-        android:id="@+id/navigation_tags"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_tags" />
 
     <item
         android:id="@+id/navigation_tagquestion"
