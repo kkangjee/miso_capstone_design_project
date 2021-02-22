@@ -1,6 +1,23 @@
-## Miso Sangmyung Random Chat App
-### 상명대학교 컴퓨터과학과 Capstone Design 프로젝트입니다.
+## MISO:) Chat App
+### Capstone Design(Graduate Project) at Sangmyung University 2020
 
+### Project Members
+DEPT | ROLE | NAME
+--- | --- | ---
+CS | Project Leader, Android Development | [문승재](https://github.com/msj0319 "@msj0319")
+CS | Android Development | [강지훈](https://github.com/kkangjee "@kkangjee")
+CS | Requirements planning, Android Development| [박형찬](https://github.com/vkzlcks "@vkzlcks")
+CS | Designer | [이우진]()
+CS | Android Development | [이호진](https://github.com/roycmlhj "@roycmlhj")
+
+### Use Configuration management tools
+- [GitHub](https://github.com/msj0319/miso_capstone_design_project "캡스톤디자인 프로젝트 Repository")
+### Use Collaboration tools
+- Slack
+### Use IDE, Language, API, Database
+[<img src = "https://user-images.githubusercontent.com/40822689/93378700-cc539000-f897-11ea-9a38-dff2878bd19e.png" width="69px">](https://developer.android.com/studio?hl=ko "안드로이드 스튜디오") [<img src = "https://user-images.githubusercontent.com/40822689/93379498-dde96780-f898-11ea-8bdd-0ceb98c99e44.png" width="69px">](https://kotlinlang.org/ "코틀린") [<img src = "https://user-images.githubusercontent.com/40822689/93382537-33c00e80-f89d-11ea-80a4-6dab94d17088.png" width="69px" height="69px">](https://firebase.google.cn/docs/auth/android/start?hl=ko "Firebase Authentication") [<img src = "https://user-images.githubusercontent.com/40822689/93382356-fb203500-f89c-11ea-95f9-56b3459d083d.png" width="69px" height="69px">](https://firebase.google.cn/docs/database/android/start?hl=ko "Firebase Realtime Database")
+
+### History
   - **2020/04/18**
      - firebase 플랫폼의 real-time database 종속항목을 추가.
 
@@ -91,3 +108,14 @@
      - 채팅 방 메시지 띄우기 기능 구현 완료 (상대방 메시지, 자신의 메시지 구분짓기 해야함)
      - TagsFragment 기능 구현 중, 태그 추가, DB 저장, 조회, 삭제 기능
      - 채팅 방 입장 후 앱을 백그라운드에 놓고, 상대방이 매칭 되면 푸시 알람으로 상대방의 입장 여부 알림 구현
+   
+   - **2020/09/15**
+     - 상대방, 사용자 메시지 구분 - 채팅 기능 구현 완료.
+     - SelectTags_signup : 기능 개발 중(20/09/16 ~) - 
+       - 회원 가입 추가, SelectTagActivity(관심있는 태그를 계정 생성 시 추가하여 추후 태그 별 채팅이 가능하도록 함)
+       - AppName 변경 : capstone_design_projrct -> 미소:)
+       - 약간의 UI 개선 작업 (signup과정)
+       - 서버에서 불러온 태그 리스트 당겨서 스와이프 시 정보 업데이트 가능.
+       - [_#33 SelectTagActivity에서 태그 선택 후 회원가입 완료 시 user 객체에 태그 정보가 들어가지 않고 DB에 저장되는 현상_](https://github.com/msj0319/miso_capstone_design_project/issues/33 "ISSUE #33")
+     - 채팅화면에서 뒤로가기 누를 시 자동으로 방 나가기 기능
+     - 캡스톤 심사 준비로 인한 개발 일시 중단. (9/22)

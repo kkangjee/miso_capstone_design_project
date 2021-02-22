@@ -12,6 +12,8 @@ open class ChatModel {
         @JvmField
         open var uid: String = ""
         @JvmField
+        open var department: String = ""
+        @JvmField
         open var msg: String = ""
         @JvmField
         open var msgtype: String = ""

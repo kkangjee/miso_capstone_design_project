@@ -30,9 +30,9 @@
 
     <fragment
         android:id="@+id/navigation_tagquestion"
-        android:name="smu.miso.ui.tagquestion.TagQuestionFragment"
+        android:name="smu.miso.ui.freetalk.FreeTalkFragment"
         android:label="@string/title_tagquestion"
-        tools:layout="@layout/fragment_tagquestion">
+        tools:layout="@layout/fragment_freetalk">
         <action
             android:id="@+id/action_navigation_tagquestion_to_navigation_tags"
             app:destination="@id/navigation_tags" />

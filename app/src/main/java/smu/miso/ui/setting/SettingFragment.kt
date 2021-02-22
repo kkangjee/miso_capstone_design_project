@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -17,9 +18,11 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_setting.*
+import kotlinx.android.synthetic.main.item_chatmsg_left.view.*
 import smu.miso.CloudFunctions
 import smu.miso.MainActivity
 import smu.miso.R
+import smu.miso.mappingDeptProfile
 
 class SettingFragment : Fragment() {
     //전역 변수 설정 공간
@@ -29,7 +32,7 @@ class SettingFragment : Fragment() {
     private var uid = auth.uid
     private var user = auth.currentUser
     private var userRef = FirebaseDatabase.getInstance().reference
-
+    var department = ""
     //기본 구성 함수(Don't touch)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,7 +63,14 @@ class SettingFragment : Fragment() {
                         emailVerified = datasnapshot.child("emailVerified").value.toString()
                         department = datasnapshot.child("department").value.toString()
 
+                        //프로필 이미지 학과별로 설정
+
+                        if(profileImageView != null)
+                            mappingDeptProfile(department,profileImageView)
+
+
                         emailValue?.text = "$studentId@sangmyung.kr"
+
                         if (emailVerified.toBoolean()) {
                             emailVerifiedValue?.text = "인증 완료"
                         } else {
@@ -75,6 +85,8 @@ class SettingFragment : Fragment() {
                         Log.w("READ FAILED", "Failed to read value")
                     }
                 })
+
+
         }
 
         //사용자 계정 로그아웃 함수
@@ -113,6 +125,11 @@ class SettingFragment : Fragment() {
             CloudFunctions.hideKeyboard(context, this.view)
         }
 
+    }
+
+    fun getDept(): String {
+        Log.d("학과확인",department)
+        return department
     }
 
     private fun deleteUser() {

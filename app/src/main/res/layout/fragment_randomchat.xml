@@ -5,34 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.randomchat.RandomChatFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#BFCFF7"
+    >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        >
 
-        <TextView
-            android:id="@+id/text_randomchat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="20sp" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="과끼리" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/radius"
+            android:text="과끼리"
+            android:textSize="50sp"
+            android:fontFamily="@font/bmjua"/>
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="전체과" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/radius"
+            android:text="전체과"
+            android:textSize="50sp"
+            android:fontFamily="@font/bmjua"/>
     </LinearLayout>
 </LinearLayout>

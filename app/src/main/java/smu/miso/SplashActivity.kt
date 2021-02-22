@@ -36,7 +36,6 @@ class SplashActivity : AppCompatActivity() {
         end_button.setOnClickListener {
             stopSearching()
             Toast.makeText(this, "대기상태 종료", Toast.LENGTH_LONG).show()
-            finish()
         }
 
         //ChatActivity에서 room id를 받아온다
@@ -108,7 +107,10 @@ class SplashActivity : AppCompatActivity() {
         userRef.child("rooms").child(roomID).setValue(null)
         //TODO: users의 자신 randomRoomId 값 초기화
         userRef.child("users").child(uid).child("randomRoomId").setValue("")
-        userRef.child("deptMap").child(department.toString()).setValue("")
+        if(department.toString()!=""){
+            userRef.child("deptMap").child(department.toString()).setValue("")
+        }
+
         finish()
     }
 
